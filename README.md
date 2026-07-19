@@ -21,6 +21,13 @@ npm install     # once
 npm run dev     # dev server, http://localhost:5173
 ```
 
+Or with Docker:
+
+```sh
+docker build -t cps-practice-exams .
+docker run --rm -p 8080:80 cps-practice-exams   # http://localhost:8080
+```
+
 `npm run build` writes a static site to `dist/` (hash routing — works from any
 static host or opened via `npm run preview`).
 
