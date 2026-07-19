@@ -186,3 +186,33 @@ h3.subgroup.examsec { display:flex; align-items:baseline; gap:12px; }
   .print-problem { break-inside:avoid; }
   .fig, .mathblock { break-inside:avoid; }
 }
+
+/* --- interactive MC + True/False --- */
+.mcq { margin:10px 0 16px; }
+.mcopts { display:flex; flex-direction:column; gap:6px; max-width:440px; }
+.mcopt { display:flex; align-items:center; gap:10px; text-align:left; border:1px solid var(--border);
+  background:var(--card); color:var(--text); border-radius:9px; padding:7px 13px; font-size:.88rem;
+  cursor:pointer; font-family:inherit; }
+.mcopt:hover { border-color:var(--accent); }
+.mcopt .radio { width:12px; height:12px; border-radius:50%; border:2px solid var(--muted); flex:none; }
+.mcopt.right { border-color:var(--green); background:var(--green-soft); }
+.mcopt.right .radio { border-color:var(--green); background:var(--green); }
+.mcopt.wrong { border-color:var(--red); background:var(--red-soft); }
+.mcopt.wrong .radio { border-color:var(--red); }
+.mcfb { font-size:.82rem; font-weight:600; margin:6px 0 0; }
+.mcfb.ok { color:var(--green); }
+.mcfb.no { color:var(--red); }
+
+.tflist { display:flex; flex-direction:column; gap:6px; margin:12px 0; }
+.tfrow { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  border:1px solid var(--border); border-radius:9px; padding:6px 13px; background:var(--card); }
+.tftext { font-size:.9rem; }
+.tfbtns { display:flex; gap:6px; margin-left:auto; }
+.tfbtn { border:1px solid var(--border); background:var(--bg); color:var(--text); border-radius:7px;
+  padding:4px 14px; font-size:.82rem; cursor:pointer; font-family:inherit; }
+.tfbtn:hover { border-color:var(--accent); }
+.tfbtn.right { border-color:var(--green); background:var(--green-soft); color:var(--green); font-weight:700; }
+.tfbtn.wrong { border-color:var(--red); background:var(--red-soft); color:var(--red); }
+.tfscore { font-size:.8rem; color:var(--muted); font-weight:600; margin:4px 0 0; }
+.paper .tfprint td.tfq { text-align:left; }
+.paper .tfprint td.tfa { white-space:nowrap; }

@@ -31,12 +31,12 @@ function PrintProblem({ problem, withSolutions }) {
           <MathText text={problem.title} />
           {!problem.info && credits > 0 && <span className="pcr"> ({credits} credit{credits !== 1 ? 's' : ''})</span>}
         </h4>
-        <Blocks blocks={problem.statement} />
+        <Blocks blocks={problem.statement} flat />
         {!problem.info && (withSolutions
           ? (problem.solution && (
               <div className="print-solution">
                 <div className="psol-label">Solution</div>
-                <Blocks blocks={problem.solution} />
+                <Blocks blocks={problem.solution} flat />
               </div>
             ))
           : <div className="answerbox" style={{ height: `${boxHeight}cm` }} />

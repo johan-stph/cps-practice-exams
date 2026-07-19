@@ -713,7 +713,8 @@
                     "CTL only",
                     "both CTL and LTL",
                     "LTL only"
-                  ]
+                  ],
+                  "correct": 2
                 },
                 {
                   "type": "mc",
@@ -723,7 +724,8 @@
                     "neither",
                     "both CTL and LTL",
                     "CTL only"
-                  ]
+                  ],
+                  "correct": 3
                 },
                 {
                   "type": "mc",
@@ -733,7 +735,8 @@
                     "LTL only",
                     "CTL only",
                     "both CTL and LTL"
-                  ]
+                  ],
+                  "correct": 0
                 },
                 {
                   "type": "mc",
@@ -743,7 +746,8 @@
                     "both CTL and LTL",
                     "LTL only",
                     "neither"
-                  ]
+                  ],
+                  "correct": 0
                 }
               ],
               "solution": [
@@ -774,36 +778,36 @@
                   "caption": "Figure 2.2: Path $\\pi$ (unlabeled states satisfy neither $\\varphi_1$ nor $\\varphi_2$; positions $s_0 \\dots s_{13}$, then $\\varphi_1$ forever)."
                 },
                 {
-                  "type": "table",
-                  "head": [
-                    "Formula",
-                    "True / False?"
+                  "type": "tf",
+                  "labels": [
+                    "True",
+                    "False"
                   ],
-                  "rows": [
-                    [
-                      "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models G(\\varphi_1 \\Rightarrow XX\\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models FG(\\varphi_1 \\vee \\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models F(\\varphi_1 \\, U \\, \\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models F(\\varphi_1 \\Rightarrow \\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models GF(\\varphi_1 \\Rightarrow X\\varphi_2)$",
-                      "?"
-                    ]
+                  "items": [
+                    {
+                      "text": "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$\\pi \\models G(\\varphi_1 \\Rightarrow XX\\varphi_2)$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$\\pi \\models FG(\\varphi_1 \\vee \\varphi_2)$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$\\pi \\models F(\\varphi_1 \\, U \\, \\varphi_2)$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$\\pi \\models F(\\varphi_1 \\Rightarrow \\varphi_2)$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$\\pi \\models GF(\\varphi_1 \\Rightarrow X\\varphi_2)$",
+                      "answer": false
+                    }
                   ]
                 }
               ],
@@ -950,7 +954,8 @@
                     "CTL only",
                     "both CTL and LTL",
                     "LTL only"
-                  ]
+                  ],
+                  "correct": 2
                 },
                 {
                   "type": "mc",
@@ -960,7 +965,8 @@
                     "CTL only",
                     "both CTL and LTL",
                     "neither"
-                  ]
+                  ],
+                  "correct": 0
                 },
                 {
                   "type": "mc",
@@ -970,7 +976,8 @@
                     "LTL only",
                     "CTL only",
                     "neither"
-                  ]
+                  ],
+                  "correct": 2
                 },
                 {
                   "type": "mc",
@@ -980,7 +987,8 @@
                     "neither",
                     "LTL only",
                     "both CTL and LTL"
-                  ]
+                  ],
+                  "correct": 1
                 }
               ],
               "solution": [
@@ -1011,36 +1019,36 @@
                   "caption": "Positions $s_0 \\dots s_4$ as labeled (\"–\" satisfies neither), then $\\varphi_2$ forever."
                 },
                 {
-                  "type": "table",
-                  "head": [
-                    "Formula",
-                    "True / False?"
+                  "type": "tf",
+                  "labels": [
+                    "True",
+                    "False"
                   ],
-                  "rows": [
-                    [
-                      "$\\pi \\models FG(\\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models \\varphi_2 \\, U \\, \\varphi_1$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models G(\\varphi_1 \\Rightarrow X\\varphi_2)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models GF(\\varphi_1)$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
-                      "?"
-                    ],
-                    [
-                      "$\\pi \\models XXX\\varphi_1$",
-                      "?"
-                    ]
+                  "items": [
+                    {
+                      "text": "$\\pi \\models FG(\\varphi_2)$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$\\pi \\models \\varphi_2 \\, U \\, \\varphi_1$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$\\pi \\models G(\\varphi_1 \\Rightarrow X\\varphi_2)$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$\\pi \\models GF(\\varphi_1)$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$\\pi \\models XXX\\varphi_1$",
+                      "answer": true
+                    }
                   ]
                 }
               ],
@@ -1130,36 +1138,36 @@
                   "caption": "Transitions: $s_0 \\to s_1$, $s_0 \\to s_2$, $s_1 \\to s_0$, $s_2 \\to s_2$."
                 },
                 {
-                  "type": "table",
-                  "head": [
-                    "Formula",
-                    "holds in $s_0$?"
+                  "type": "tf",
+                  "labels": [
+                    "Yes",
+                    "No"
                   ],
-                  "rows": [
-                    [
-                      "$s_0 \\models AX\\,p$",
-                      "?"
-                    ],
-                    [
-                      "$s_0 \\models EF\\,q$",
-                      "?"
-                    ],
-                    [
-                      "$s_0 \\models AF\\,q$",
-                      "?"
-                    ],
-                    [
-                      "$s_0 \\models AG\\,EF\\,q$",
-                      "?"
-                    ],
-                    [
-                      "$s_0 \\models E(p \\, U \\, q)$",
-                      "?"
-                    ],
-                    [
-                      "$s_0 \\models A(p \\, U \\, q)$",
-                      "?"
-                    ]
+                  "items": [
+                    {
+                      "text": "$s_0 \\models AX\\,p$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$s_0 \\models EF\\,q$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$s_0 \\models AF\\,q$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$s_0 \\models AG\\,EF\\,q$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$s_0 \\models E(p \\, U \\, q)$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$s_0 \\models A(p \\, U \\, q)$",
+                      "answer": false
+                    }
                   ]
                 }
               ],
@@ -1188,28 +1196,28 @@
                   "text": "Which of the following LTL equivalences hold for all paths? (Careful — some look symmetric but are not.)"
                 },
                 {
-                  "type": "table",
-                  "head": [
-                    "Claimed equivalence",
-                    "valid?"
+                  "type": "tf",
+                  "labels": [
+                    "Valid",
+                    "Not valid"
                   ],
-                  "rows": [
-                    [
-                      "$G(\\varphi \\wedge \\psi) \\equiv G\\varphi \\wedge G\\psi$",
-                      "?"
-                    ],
-                    [
-                      "$F(\\varphi \\wedge \\psi) \\equiv F\\varphi \\wedge F\\psi$",
-                      "?"
-                    ],
-                    [
-                      "$GF(\\varphi \\vee \\psi) \\equiv GF\\varphi \\vee GF\\psi$",
-                      "?"
-                    ],
-                    [
-                      "$FG\\,\\varphi \\equiv GF\\,\\varphi$",
-                      "?"
-                    ]
+                  "items": [
+                    {
+                      "text": "$G(\\varphi \\wedge \\psi) \\equiv G\\varphi \\wedge G\\psi$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$F(\\varphi \\wedge \\psi) \\equiv F\\varphi \\wedge F\\psi$",
+                      "answer": false
+                    },
+                    {
+                      "text": "$GF(\\varphi \\vee \\psi) \\equiv GF\\varphi \\vee GF\\psi$",
+                      "answer": true
+                    },
+                    {
+                      "text": "$FG\\,\\varphi \\equiv GF\\,\\varphi$",
+                      "answer": false
+                    }
                   ]
                 }
               ],
