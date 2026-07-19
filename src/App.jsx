@@ -8,6 +8,22 @@ const ExamContext = createContext(null);
 
 const BADGE_CLASS = { 'retake-2021': 'retake', 'claude-exam-1': 'new', 'claude-exam-2': 'hard' };
 
+function Difficulty({ value }) {
+  if (!value) return null;
+  const cls = value <= 4 ? 'easy' : value <= 6 ? 'mid' : 'tough';
+  return (
+    <span className={`difficulty ${cls}`} title={`Difficulty ${value}/10 (Claude's rating)`}>
+      <span className="difflabel">difficulty</span>
+      <span className="diffdots">
+        {Array.from({ length: 10 }, (_, i) => (
+          <span key={i} className={'dot' + (i < value ? ' filled' : '')} />
+        ))}
+      </span>
+      <b>{value}/10</b>
+    </span>
+  );
+}
+
 function problemsOf(section) {
   return section.groups.flatMap(g => g.problems);
 }
@@ -108,7 +124,7 @@ function ExamPage() {
         {exam.title}
         <span className="blockprog">{doneCount} / {gradable.length} done</span>
       </h2>
-      <p className="blockdesc">{exam.meta} — all four problems on one page.</p>
+      <p className="blockdesc">{exam.meta} — all four problems on one page. <Difficulty value={exam.difficulty} /></p>
       <SolutionTools onExpand={() => setAllOpen(true)} onCollapse={() => setAllOpen(false)} />
       {perSection.map(({ section, problems }) => (
         <section key={section.id}>
@@ -158,6 +174,7 @@ function Home() {
             <Link key={e.id} to={`/exam/${e.id}`} className="homecard">
               <h3>{e.title}</h3>
               <p>{e.meta}</p>
+              <p><Difficulty value={e.difficulty} /></p>
               <div className="progress-outer"><div className="progress-inner" style={{ width: `${probs.length ? 100 * dc / probs.length : 0}%` }} /></div>
               <span className="homeprog">{dc} / {probs.length} done</span>
             </Link>
