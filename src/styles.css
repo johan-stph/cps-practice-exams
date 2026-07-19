@@ -216,3 +216,8 @@ h3.subgroup.examsec { display:flex; align-items:baseline; gap:12px; }
 .tfscore { font-size:.8rem; color:var(--muted); font-weight:600; margin:4px 0 0; }
 .paper .tfprint td.tfq { text-align:left; }
 .paper .tfprint td.tfa { white-space:nowrap; }
+
+/* KaTeX renders a visually-hidden MathML copy for screen readers; Safari's
+   print/PDF pipeline ignores the clipping and prints it as duplicated vertical
+   glyphs. Hide it entirely — the HTML layer is the visual source of truth. */
+.katex .katex-mathml { display: none !important; }
