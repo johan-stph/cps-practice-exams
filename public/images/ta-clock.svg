@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="380" role="img"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g fill="none" stroke="currentColor" stroke-width="1.4">
+  <circle cx="100" cy="60" r="18"/><circle cx="320" cy="60" r="18"/>
+  <line x1="55" y1="60" x2="80" y2="60" marker-end="url(#arr)"/>
+  <path d="M 116,49 C 180,15 250,15 305,47" marker-end="url(#arr)"/>
+  <path d="M 304,72 C 250,105 180,105 116,72" marker-end="url(#arr)"/>
+</g>
+<g font-size="13" fill="currentColor">
+  <text x="100" y="64" text-anchor="middle" font-style="italic">z₁</text>
+  <text x="320" y="64" text-anchor="middle" font-style="italic">z₂</text>
+  <text x="210" y="18" text-anchor="middle">c₁ ≥ 1 ; c₁ ≔ 0</text>
+  <text x="210" y="112" text-anchor="middle">c₁ ≥ 1 ; c₁ ≔ 0</text>
+</g></svg>

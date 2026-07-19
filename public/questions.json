@@ -1,0 +1,1435 @@
+{
+  "exams": [
+    {
+      "id": "retake-2021",
+      "label": "Retake 2021",
+      "title": "Retake Exam — 15 October 2021",
+      "meta": "IN2305 / Retake · Examiner: Prof. Dr.-Ing. Matthias Althoff · 90 min · 59 credits · 4 problems"
+    },
+    {
+      "id": "claude-exam-1",
+      "label": "Claude Exam 1",
+      "title": "Claude Exam 1",
+      "meta": "Newly created problems in the retake-exam style · 90–100 min · ≈ 70 credits · 4 problems"
+    }
+  ],
+  "sections": [
+    {
+      "id": "short-questions",
+      "short": "Short Questions",
+      "title": "Problem 1 — Short Questions",
+      "desc": "Mixed quick questions across all lectures. Retake 2021: 14 credits total.",
+      "groups": [
+        {
+          "title": "Ported · Retake exam 2021",
+          "problems": [
+            {
+              "id": "r1a",
+              "title": "a) Mealy machine — output sequence",
+              "exam": "retake-2021",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is a Mealy machine in its initial state. Specify the resulting output sequence for the input sequence $\\tilde{u} = (\\tilde{u}_1, \\tilde{u}_2, \\tilde{u}_0)$."
+                },
+                {
+                  "type": "fig",
+                  "src": "mealy.svg",
+                  "caption": "Figure 1.1: Mealy machine (initial state $z_2$)."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Start in $z_2$: $\\;z_2 \\xrightarrow{\\tilde{u}_1/\\tilde{y}_2} z_2 \\xrightarrow{\\tilde{u}_2/\\tilde{y}_0} z_3 \\xrightarrow{\\tilde{u}_0/\\tilde{y}_1} z_3$."
+                },
+                {
+                  "type": "p",
+                  "text": "**Output sequence:** $\\tilde{y} = (\\tilde{y}_2, \\tilde{y}_0, \\tilde{y}_1)$."
+                }
+              ]
+            },
+            {
+              "id": "r1b",
+              "title": "b) Statechart with a single AND state",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Draw a statechart with a single AND state and a minimal amount of states."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "An AND state must contain at least two orthogonal (parallel) regions, and each region needs at least one state. Minimal: the AND state itself plus one basic state per region → **3 states**."
+                },
+                {
+                  "type": "fig",
+                  "src": "statechart-and.svg"
+                }
+              ]
+            },
+            {
+              "id": "r1c",
+              "title": "c) CTL transformation",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Transform the CTL expression $AF(\\varphi_1 \\wedge \\varphi_2)$ such that only $\\neg$, $\\vee$, $EX$, $EU$, and $EG$ are used."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Using $AF(\\varphi) \\equiv \\neg EG(\\neg\\varphi)$ and De Morgan $\\neg(\\varphi_1 \\wedge \\varphi_2) \\equiv \\neg\\varphi_1 \\vee \\neg\\varphi_2$:"
+                },
+                {
+                  "type": "math",
+                  "tex": "AF(\\varphi_1 \\wedge \\varphi_2) \\;\\equiv\\; \\neg EG(\\neg\\varphi_1 \\vee \\neg\\varphi_2)"
+                }
+              ]
+            },
+            {
+              "id": "r1d",
+              "title": "d) Euler method — approximation error",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is $\\dot{x}(t) = f(x(t)) = x(t)$, $x(0) = 1$, and the step size $h = \\ln 2$ (natural logarithm). Compute an approximation of $x(h)$ using the Euler method, and provide the approximation error at $t = h$ to the analytical solution $x(t) = e^t$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Euler step: $x(h) \\approx x(0) + h \\cdot f(x(0)) = 1 + \\ln 2 \\cdot 1 = \\mathbf{1 + \\ln 2 \\approx 1.693}$."
+                },
+                {
+                  "type": "p",
+                  "text": "Analytical: $x(h) = e^{\\ln 2} = 2$. Error: $2 - (1 + \\ln 2) = \\mathbf{1 - \\ln 2 \\approx 0.307}$."
+                }
+              ]
+            },
+            {
+              "id": "r1e",
+              "title": "e) Exact linearization",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is $\\dot{x} = f(x, u)$, where $x$ is the state and $u$ is the input. Provide the most general system dynamics for which the linearization of $f(x, u)$ in $x = x^*$ and $u = u^*$ is exact."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "The first-order Taylor expansion is exact iff all higher-order derivatives vanish, i.e. $f$ is **affine** in $x$ and $u$:"
+                },
+                {
+                  "type": "math",
+                  "tex": "f(x, u) = A x + B u + c"
+                },
+                {
+                  "type": "p",
+                  "text": "with constant matrices $A$, $B$ and a constant offset $c$."
+                }
+              ]
+            },
+            {
+              "id": "r1f",
+              "title": "f) LQR weighting matrices",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Explain the difference in closed-loop system behavior between two LQR controllers $C_1$ and $C_2$, where the weighting matrices for the first are $Q_1 = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $R_1 = 1$, and for the second $Q_2 = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $R_2 = 2$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Both weight the states equally, but $C_2$ penalizes control effort twice as much ($R_2 = 2R_1$). Hence **$C_2$ uses smaller control inputs and the closed loop converges more slowly (less aggressively)**; $C_1$ reacts faster at the price of larger actuation. Only the ratio between $Q$ and $R$ matters."
+                }
+              ]
+            },
+            {
+              "id": "r1g",
+              "title": "g) Timed automaton not simulatable by an FSA",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Sketch a timed automaton with two states $z_1$, $z_2$ and one clock $c_1$, which cannot be simulated by a finite state automaton."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "fig",
+                  "src": "ta-clock.svg"
+                },
+                {
+                  "type": "p",
+                  "text": "The behavior depends on the real-valued clock $c_1$: the full state is $(z, c_1) \\in \\{z_1, z_2\\} \\times \\mathbb{R}_{\\geq 0}$, an **uncountably infinite** state space, and whether a transition may fire depends on the exact continuous clock value. A finite state automaton has finitely many states and no notion of time, so it cannot simulate this timing-restricted behavior (any automaton whose guard actually constrains behavior works as an answer)."
+                }
+              ]
+            },
+            {
+              "id": "r1h",
+              "title": "h) Reachability analysis for safety",
+              "exam": "retake-2021",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Explain how reachability analysis of continuous-time dynamical systems verifies that no unsafe states are reached."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "One computes the set of all states reachable from the initial set (for all allowed inputs/disturbances) over the considered time horizon — in practice a guaranteed **over-approximation** of it. If this reachable set has an **empty intersection with the unsafe set**, no trajectory can reach an unsafe state, so the system is verified safe."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 1",
+          "problems": [
+            {
+              "id": "n1a",
+              "title": "a) Moore machine — output sequence",
+              "exam": "claude-exam-1",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is a Moore machine in its initial state $z_1$. Specify the resulting output sequence (including the output of the initial state) for the input sequence $\\tilde{u} = (\\tilde{u}_1, \\tilde{u}_1, \\tilde{u}_2)$."
+                },
+                {
+                  "type": "fig",
+                  "src": "moore.svg"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "State sequence: $z_1 \\to z_2 \\to z_3 \\to z_1$. In a Moore machine the output is attached to the state, so the initial state already produces an output:"
+                },
+                {
+                  "type": "p",
+                  "text": "$\\tilde{y} = (\\tilde{y}_0, \\tilde{y}_1, \\tilde{y}_2, \\tilde{y}_0)$ — one output more than inputs."
+                }
+              ]
+            },
+            {
+              "id": "n1b",
+              "title": "b) Flattening an AND state",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A statechart consists of a single AND state with two orthogonal regions. The first region contains 2 basic states, the second region contains 3 basic states. How many states does an equivalent flat finite state automaton have? Justify your answer."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "In an AND state both regions are active simultaneously, so the flat automaton must represent every combination of active substates: $2 \\cdot 3 = \\mathbf{6}$ **states**. (This product growth is exactly why AND states compress models.)"
+                }
+              ]
+            },
+            {
+              "id": "n1c",
+              "title": "c) CTL transformation",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Transform the CTL expression $AG(\\varphi_1)$ such that only $\\neg$, $\\vee$, $EX$, $EU$, and $EG$ are used. (Hint: $EF(\\varphi) \\equiv E(\\mathrm{true} \\; U \\; \\varphi)$, and $\\mathrm{true} \\equiv \\varphi \\vee \\neg\\varphi$.)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "AG(\\varphi_1) \\;\\equiv\\; \\neg EF(\\neg\\varphi_1) \\;\\equiv\\; \\neg E\\big( (\\varphi_1 \\vee \\neg\\varphi_1) \\; U \\; \\neg\\varphi_1 \\big)"
+                }
+              ]
+            },
+            {
+              "id": "n1d",
+              "title": "d) Euler method — error and step size",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is $\\dot{x}(t) = -2x(t)$, $x(0) = 1$, step size $h = 0.5$. Compute the Euler approximation of $x(h)$ and the error to the analytical solution $x(t) = e^{-2t}$. For which step sizes $h$ does the Euler method become unstable for this system?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Euler: $x(h) \\approx 1 + 0.5 \\cdot (-2 \\cdot 1) = \\mathbf{0}$. Analytical: $e^{-1} \\approx 0.368$ → error $\\approx \\mathbf{0.368}$."
+                },
+                {
+                  "type": "p",
+                  "text": "Euler iteration: $x_{k+1} = (1 - 2h)\\,x_k$. Stable iff $|1 - 2h| < 1 \\Leftrightarrow 0 < h < 1$. **Unstable for $h > 1$** (at $h = 1$ the iterate oscillates with constant amplitude)."
+                }
+              ]
+            },
+            {
+              "id": "n1e",
+              "title": "e) Linearization around an equilibrium",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Linearize $\\dot{x} = f(x, u) = -x^2 + u$ around the equilibrium $x^* = 2$, $u^* = 4$. State the linearized dynamics in the deviation variables $\\delta x = x - x^*$, $\\delta u = u - u^*$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Check equilibrium: $f(2, 4) = -4 + 4 = 0$ ✓. Jacobians: $\\partial f / \\partial x = -2x \\,|_{x^*=2} = -4$, $\\partial f / \\partial u = 1$."
+                },
+                {
+                  "type": "math",
+                  "tex": "\\dot{\\delta x} = -4\\,\\delta x + \\delta u"
+                },
+                {
+                  "type": "p",
+                  "text": "The linearization is a good approximation only near $(x^*, u^*)$."
+                }
+              ]
+            },
+            {
+              "id": "n1f",
+              "title": "f) LQR — scaling the state weight",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Two LQR controllers use $Q_1 = I$, $R_1 = 1$ and $Q_2 = 10 \\cdot I$, $R_2 = 1$. Explain the difference in closed-loop behavior. What happens if instead *both* $Q$ and $R$ are multiplied by 10?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "$C_2$ penalizes state deviations 10× more relative to control effort → **faster convergence of the states with larger control inputs** (more aggressive controller)."
+                },
+                {
+                  "type": "p",
+                  "text": "Scaling $Q$ *and* $R$ by the same factor scales the whole cost function but leaves its minimizer unchanged → **identical controller**; only the ratio $Q/R$ matters."
+                }
+              ]
+            },
+            {
+              "id": "n1g",
+              "title": "g) Timed automaton — clock regions",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A timed automaton has a single clock $c_1$, and the largest constant appearing in any clock constraint is 2. Enumerate all clock regions of the region abstraction. Why is this abstraction useful?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Regions: $\\{0\\},\\; (0,1),\\; \\{1\\},\\; (1,2),\\; \\{2\\},\\; (2,\\infty)$ — **6 regions**."
+                },
+                {
+                  "type": "p",
+                  "text": "All clock valuations within one region satisfy the same clock constraints and lead to time-abstract equivalent behavior. Since there are only **finitely many** regions, verification problems (e.g. reachability) on the uncountable state space become decidable on the finite region automaton."
+                }
+              ]
+            },
+            {
+              "id": "n1h",
+              "title": "h) Reachability analysis — inconclusive result",
+              "exam": "claude-exam-1",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "An over-approximative reachability analysis returns a reachable set that *intersects* the unsafe set. Can you conclude that the system is unsafe? What can be done next?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**No.** The intersection may be caused purely by the over-approximation error — the result is **inconclusive**. Next steps: reduce the over-approximation (smaller time steps, tighter set representations, splitting the initial set) and re-run; or try to find a concrete counterexample trajectory (falsification) to prove unsafety."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discrete-systems",
+      "short": "Discrete Systems",
+      "title": "Problem 2 — Discrete Systems",
+      "desc": "Petri nets, automata, coverage, CTL/LTL. Retake 2021: 14 credits total.",
+      "groups": [
+        {
+          "title": "Ported · Retake exam 2021 — Signal-interpreted Petri net",
+          "problems": [
+            {
+              "id": "r2net",
+              "title": "Given: signal-interpreted Petri net (SIPN)",
+              "exam": "retake-2021",
+              "info": true,
+              "statement": [
+                {
+                  "type": "fig",
+                  "src": "petri-retake.svg",
+                  "caption": "Figure 2.1: Petri net. Initial marking: one token in $P_1$ and one in $P_5$."
+                },
+                {
+                  "type": "p",
+                  "text": "$T_1$ ($u_1$): $P_1 + P_5 \\to P_2 + P_4$ · $T_2$ ($\\neg u_2$): $P_2 \\to P_3$ · $T_3$ ($\\neg u_1$): $P_3 \\to P_1$ · $T_4$ ($u_2$): $P_4 \\to P_5$"
+                }
+              ]
+            },
+            {
+              "id": "r2a",
+              "title": "a) First stable marking",
+              "exam": "retake-2021",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "What is the first stable marking for the binary inputs $u_1 = 1$ and $u_2 = 0$?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Marking order $(P_1, \\dots, P_5)$, start $(1,0,0,0,1)$. Fire all enabled transitions with true conditions until nothing changes:"
+                },
+                {
+                  "type": "p",
+                  "text": "$T_1$ ($u_1{=}1$): $\\to (0,1,0,1,0)$. $\\;T_2$ ($\\neg u_2{=}1$): $\\to (0,0,1,1,0)$. $\\;T_3$ needs $\\neg u_1 = 0$ ✗, $T_4$ needs $u_2 = 1$ ✗."
+                },
+                {
+                  "type": "p",
+                  "text": "**First stable marking: $M = (0, 0, 1, 1, 0)$**, i.e. tokens in $P_3$ and $P_4$."
+                }
+              ]
+            },
+            {
+              "id": "r2b",
+              "title": "b) Reachability graph",
+              "exam": "retake-2021",
+              "credits": "4 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Draw the reachability graph of the Petri net (consider all input combinations; simultaneous firing of transitions with non-contradictory conditions is possible)."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Six reachable markings (written as marked places):"
+                },
+                {
+                  "type": "fig",
+                  "src": "reachability-graph.svg"
+                },
+                {
+                  "type": "p",
+                  "text": "From $\\{P_2,P_4\\}$ either $T_2$ or $T_4$ fires — never both, since $\\neg u_2 \\wedge u_2$ is contradictory. From $\\{P_3,P_4\\}$: $T_3$, $T_4$, or **$T_3$ and $T_4$ simultaneously** ($\\neg u_1 \\wedge u_2$ is satisfiable) $\\to \\{P_1,P_5\\}$."
+                }
+              ]
+            },
+            {
+              "id": "r2c",
+              "title": "c) Incidence matrix",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Write down the incidence matrix in case of a place/transition Petri net (ignore firing conditions)."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Rows $P_1 \\dots P_5$, columns $T_1 \\dots T_4$ (entry = tokens produced − consumed):"
+                },
+                {
+                  "type": "math",
+                  "tex": "N = \\begin{pmatrix} -1 & 0 & +1 & 0 \\\\ +1 & -1 & 0 & 0 \\\\ 0 & +1 & -1 & 0 \\\\ +1 & 0 & 0 & -1 \\\\ -1 & 0 & 0 & +1 \\end{pmatrix}"
+                }
+              ]
+            },
+            {
+              "id": "r2d",
+              "title": "d) Unstable cycle?",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Is it possible to create an unstable cycle by changing the firing condition of $T_2$? If yes, state the modified firing condition of $T_2$; if no, explain why this is not possible."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**No.** An unstable cycle requires a firing sequence that repeats forever while the inputs are constant. Token conservation in this net forces any repeating sequence to fire $T_1$ and $T_3$ equally often ($T_1$ is the only producer of $P_2/P_4$ and the only consumer of $P_1$; $T_3$ is the only producer of $P_1$). But $T_1$ requires $u_1$ and $T_3$ requires $\\neg u_1$ — a contradiction for constant inputs. Since this conflict does not involve $T_2$, no choice of firing condition for $T_2$ can create an unstable cycle."
+                }
+              ]
+            },
+            {
+              "id": "r2e",
+              "title": "e) CTL / LTL classification (multiple choice)",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Which expressions are written in CTL only, LTL only, both CTL and LTL, neither CTL nor LTL? (+0.5 per correct, −0.5 per wrong cross.)"
+                },
+                {
+                  "type": "mc",
+                  "prompt": "1. $AG(\\Phi)$",
+                  "options": [
+                    "neither",
+                    "CTL only",
+                    "both CTL and LTL",
+                    "LTL only"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "2. $E(\\Phi_1 \\, U \\, \\Phi_2)$",
+                  "options": [
+                    "LTL only",
+                    "neither",
+                    "both CTL and LTL",
+                    "CTL only"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "3. $EG(\\Phi_1) \\Rightarrow GF(\\Phi_2)$",
+                  "options": [
+                    "neither",
+                    "LTL only",
+                    "CTL only",
+                    "both CTL and LTL"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "4. $EG\\big(\\Phi_1 \\Rightarrow (\\neg\\Phi_2 \\, AU \\, \\Phi_3)\\big)$",
+                  "options": [
+                    "CTL only",
+                    "both CTL and LTL",
+                    "LTL only",
+                    "neither"
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "**Both CTL and LTL** — CTL: $AG(\\Phi)$; LTL: $G(\\Phi)$ (with the implicit universal path quantifier).",
+                    "**CTL only** — the existential path quantifier $E$ does not exist in LTL, and $E(\\dots U \\dots)$ is a proper CTL formula.",
+                    "**Neither** — $EG(\\Phi_1)$ is CTL-only, $GF(\\Phi_2)$ is LTL-only ($F$ not directly preceded by a path quantifier); the mixture is only expressible in CTL*.",
+                    "**CTL only** — every temporal operator is directly paired with a path quantifier: $EG(\\dots)$ and $A(\\neg\\Phi_2 \\, U \\, \\Phi_3)$; this nesting with $E$ is not LTL."
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "r2f",
+              "title": "f) LTL formulas on a path (multiple choice)",
+              "exam": "retake-2021",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is the following path $\\pi$, which is continued with $\\varphi_1$ until infinity. Determine which of the following LTL formulas are correct for this path."
+                },
+                {
+                  "type": "fig",
+                  "src": "path-retake.svg",
+                  "caption": "Figure 2.2: Path $\\pi$ (unlabeled states satisfy neither $\\varphi_1$ nor $\\varphi_2$; positions $s_0 \\dots s_{13}$, then $\\varphi_1$ forever)."
+                },
+                {
+                  "type": "table",
+                  "head": [
+                    "Formula",
+                    "True / False?"
+                  ],
+                  "rows": [
+                    [
+                      "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models G(\\varphi_1 \\Rightarrow XX\\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models FG(\\varphi_1 \\vee \\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models F(\\varphi_1 \\, U \\, \\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models F(\\varphi_1 \\Rightarrow \\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models GF(\\varphi_1 \\Rightarrow X\\varphi_2)$",
+                      "?"
+                    ]
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Labels: $s_0\\,\\varphi_1$, $s_1\\,\\varphi_1$, $s_2\\,\\{\\varphi_1,\\varphi_2\\}$, $s_3\\,\\varnothing$, $s_4\\,\\varphi_2$, $s_5\\,\\varphi_1$, $s_6\\,\\varphi_2$, $s_7\\,\\varphi_1$, $s_8\\,\\{\\varphi_1,\\varphi_2\\}$, $s_9\\,\\varnothing$, $s_{10}\\,\\varnothing$, $s_{11}\\,\\varphi_1$, $s_{12}\\,\\varphi_2$, $s_{13}\\,\\varphi_1$, then $\\varphi_1$ forever."
+                },
+                {
+                  "type": "ol",
+                  "items": [
+                    "$\\varphi_1 R \\varphi_2$: **False** — release requires $\\varphi_2$ to hold at position 0 (until released by $\\varphi_1 \\wedge \\varphi_2$); $s_0 \\not\\models \\varphi_2$.",
+                    "$G(\\varphi_1 \\Rightarrow XX\\varphi_2)$: **False** — $s_1 \\models \\varphi_1$ but $s_3 \\not\\models \\varphi_2$.",
+                    "$FG(\\varphi_1 \\vee \\varphi_2)$: **True** — from $s_{11}$ on every state satisfies $\\varphi_1$ or $\\varphi_2$ (tail is $\\varphi_1$ forever).",
+                    "$F(\\varphi_1 U \\varphi_2)$: **True** — e.g. at $s_2$ the formula $\\varphi_1 U \\varphi_2$ holds immediately ($\\varphi_2$ holds there).",
+                    "$F(\\varphi_1 \\Rightarrow \\varphi_2)$: **True** — e.g. at $s_3$, $\\varphi_1$ is false, so the implication holds (also at $s_2$ where both hold).",
+                    "$GF(\\varphi_1 \\Rightarrow X\\varphi_2)$: **False** — in the infinite $\\varphi_1$-tail, $\\varphi_1$ holds but $X\\varphi_2$ never does, so the implication is false from some point on; it does not hold infinitely often."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 1",
+          "problems": [
+            {
+              "id": "n2sipn",
+              "title": "New SIPN — stable marking, reachability, incidence, unstable cycle",
+              "exam": "claude-exam-1",
+              "credits": "≈ 8 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is the following signal-interpreted Petri net with binary inputs $u_1$, $u_2$:"
+                },
+                {
+                  "type": "fig",
+                  "src": "sipn-new.svg",
+                  "caption": "$T_1$ ($u_1$): $P_1 \\to P_2$ · $T_2$ ($u_2$): $P_2 \\to P_3$ · $T_3$ ($\\neg u_1$): $P_3 \\to P_1$. Initial marking: token in $P_1$."
+                },
+                {
+                  "type": "subq",
+                  "text": "a) What is the first stable marking for $u_1 = 1$, $u_2 = 1$? (1 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Draw the reachability graph. (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Write down the incidence matrix (place/transition net, ignoring firing conditions). (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) Is it possible to create an unstable cycle by changing the firing condition of $T_3$? If yes, state a modified firing condition; if no, explain why. (2 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** Start $(1,0,0)$. $T_1$ ($u_1{=}1$) $\\to (0,1,0)$. $T_2$ ($u_2{=}1$) $\\to (0,0,1)$. $T_3$ needs $\\neg u_1 = 0$ ✗. **Stable marking $(0,0,1)$** — token in $P_3$."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** Three markings in a cycle: $\\{P_1\\} \\xrightarrow{T_1 (u_1)} \\{P_2\\} \\xrightarrow{T_2 (u_2)} \\{P_3\\} \\xrightarrow{T_3 (\\neg u_1)} \\{P_1\\}$. Only one transition is enabled in each marking, so the reachability graph is exactly this 3-cycle."
+                },
+                {
+                  "type": "math",
+                  "tex": "\\textbf{c)}\\quad N = \\begin{pmatrix} -1 & 0 & +1 \\\\ +1 & -1 & 0 \\\\ 0 & +1 & -1 \\end{pmatrix}"
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** **Yes.** The only repeating firing sequence is the cycle $T_1 T_2 T_3$, which currently needs $u_1 \\wedge u_2 \\wedge \\neg u_1$ — contradictory. Changing $T_3$'s condition to anything consistent with $u_1 \\wedge u_2$, e.g. **$T_3\\!: u_1$** (or $u_2$, or true), makes the cycle fire forever for the constant input $u_1 = u_2 = 1$: the token cycles $P_1 \\to P_2 \\to P_3 \\to P_1 \\to \\dots$ and no stable marking is ever reached — an unstable cycle."
+                }
+              ]
+            },
+            {
+              "id": "n2fsa",
+              "title": "New FSA — coverage metrics",
+              "exam": "claude-exam-1",
+              "credits": "≈ 9 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is the following finite state automaton with initial state $z_1$ (deterministic; inputs $\\tilde{u}_1, \\tilde{u}_2, \\tilde{u}_3$):"
+                },
+                {
+                  "type": "fig",
+                  "src": "fsa-new.svg",
+                  "caption": "Transitions: $z_1 \\xrightarrow{\\tilde{u}_1} z_2$, $\\;z_2 \\xrightarrow{\\tilde{u}_3} z_2$ (self-loop), $\\;z_2 \\xrightarrow{\\tilde{u}_2} z_3$, $\\;z_3 \\xrightarrow{\\tilde{u}_2} z_1$, $\\;z_3 \\xrightarrow{\\tilde{u}_1} z_4$, $\\;z_4 \\xrightarrow{\\tilde{u}_3} z_1$ (6 transitions)."
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Generate an input sequence such that the state coverage is 100 %. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) What is the transition coverage of the input sequence $(\\tilde{u}_1, \\tilde{u}_2, \\tilde{u}_2, \\tilde{u}_1, \\tilde{u}_2)$? (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Generate an input sequence such that the transition coverage is 100 %. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) How many different paths of length 3 (3 transitions) starting in $z_1$ exist? (3 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** $(\\tilde{u}_1, \\tilde{u}_2, \\tilde{u}_1)$: $z_1 \\to z_2 \\to z_3 \\to z_4$ — all 4 states visited → state coverage $4/4 = 100\\,\\%$."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** $z_1 \\xrightarrow{\\tilde{u}_1} z_2 \\xrightarrow{\\tilde{u}_2} z_3 \\xrightarrow{\\tilde{u}_2} z_1 \\xrightarrow{\\tilde{u}_1} z_2 \\xrightarrow{\\tilde{u}_2} z_3$. Distinct transitions used: 3 → coverage $3/6 = \\mathbf{1/2}$."
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** e.g. $(\\tilde{u}_1, \\tilde{u}_3, \\tilde{u}_2, \\tilde{u}_2, \\tilde{u}_1, \\tilde{u}_2, \\tilde{u}_1, \\tilde{u}_3)$: $z_1 \\to z_2 \\to z_2 \\to z_3 \\to z_1 \\to z_2 \\to z_3 \\to z_4 \\to z_1$ — all 6 transitions traversed."
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** $z_1 \\xrightarrow{\\tilde{u}_1} z_2$ is forced. From $z_2$: to $z_2$ ($\\tilde{u}_3$) or $z_3$ ($\\tilde{u}_2$). Length-3 paths: $z_1 z_2 z_2 z_2$, $z_1 z_2 z_2 z_3$, $z_1 z_2 z_3 z_1$, $z_1 z_2 z_3 z_4$ → **4 paths**."
+                }
+              ]
+            },
+            {
+              "id": "n2ctl",
+              "title": "New CTL / LTL classification (multiple choice)",
+              "exam": "claude-exam-1",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Classify each expression: CTL only, LTL only, both, or neither."
+                },
+                {
+                  "type": "mc",
+                  "prompt": "1. $A(\\Phi_1 \\, U \\, \\Phi_2)$",
+                  "options": [
+                    "neither",
+                    "CTL only",
+                    "both CTL and LTL",
+                    "LTL only"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "2. $FG(\\Phi_1)$",
+                  "options": [
+                    "LTL only",
+                    "CTL only",
+                    "both CTL and LTL",
+                    "neither"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "3. $AG(EF(\\Phi_1))$",
+                  "options": [
+                    "both CTL and LTL",
+                    "LTL only",
+                    "CTL only",
+                    "neither"
+                  ]
+                },
+                {
+                  "type": "mc",
+                  "prompt": "4. $(X\\Phi_1) \\Rightarrow AG(\\Phi_2)$",
+                  "options": [
+                    "CTL only",
+                    "neither",
+                    "LTL only",
+                    "both CTL and LTL"
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "**Both** — CTL: $A(\\Phi_1 U \\Phi_2)$; LTL: $\\Phi_1 U \\Phi_2$ with the implicit universal quantifier.",
+                    "**LTL only** — in CTL each $F$/$G$ needs its own path quantifier; $AF\\,AG(\\Phi_1)$ is *not* equivalent to the LTL formula $FG(\\Phi_1)$.",
+                    "**CTL only** — the classic \"reset property\" $AG\\,EF\\,\\Phi$ has no LTL equivalent.",
+                    "**Neither** — $X\\Phi_1$ without a path quantifier is LTL syntax, $AG(\\Phi_2)$ is CTL syntax; the combination is only CTL*."
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "n2ltl",
+              "title": "New LTL formulas on a path (multiple choice)",
+              "exam": "claude-exam-1",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is the path $\\pi$ below, which is continued with $\\varphi_2$ until infinity. Determine which of the following LTL formulas hold for $\\pi$."
+                },
+                {
+                  "type": "fig",
+                  "src": "path-new.svg",
+                  "caption": "Positions $s_0 \\dots s_4$ as labeled (\"–\" satisfies neither), then $\\varphi_2$ forever."
+                },
+                {
+                  "type": "table",
+                  "head": [
+                    "Formula",
+                    "True / False?"
+                  ],
+                  "rows": [
+                    [
+                      "$\\pi \\models FG(\\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models \\varphi_2 \\, U \\, \\varphi_1$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models G(\\varphi_1 \\Rightarrow X\\varphi_2)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models GF(\\varphi_1)$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models \\varphi_1 \\, R \\, \\varphi_2$",
+                      "?"
+                    ],
+                    [
+                      "$\\pi \\models XXX\\varphi_1$",
+                      "?"
+                    ]
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "$FG(\\varphi_2)$: **True** — from $s_5$ on, $\\varphi_2$ holds forever.",
+                    "$\\varphi_2 U \\varphi_1$: **True** — $\\varphi_2$ holds at $s_0$ and $\\varphi_1$ holds at $s_1$.",
+                    "$G(\\varphi_1 \\Rightarrow X\\varphi_2)$: **False** — $s_1 \\models \\varphi_1$ but $s_2 \\not\\models \\varphi_2$.",
+                    "$GF(\\varphi_1)$: **False** — $\\varphi_1$ holds only at finitely many positions ($s_1$, $s_3$, $s_4$).",
+                    "$\\varphi_1 R \\varphi_2$: **False** — $\\varphi_2$ must hold from position 0 onward until (and including) a position where $\\varphi_1$ also holds; $s_1 \\not\\models \\varphi_2$ and no earlier position satisfies $\\varphi_1$.",
+                    "$XXX\\varphi_1$: **True** — position $s_3$ satisfies $\\varphi_1$."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "continuous-systems",
+      "short": "Continuous Systems",
+      "title": "Problem 3 — Continuous Systems",
+      "desc": "LTI analysis: controllability, observability, transfer functions, stability, control design. Retake 2021: 15 credits total.",
+      "groups": [
+        {
+          "title": "Ported · Retake exam 2021 — LTI system with parameter α",
+          "problems": [
+            {
+              "id": "r3sys",
+              "title": "Given: LTI system",
+              "exam": "retake-2021",
+              "info": true,
+              "statement": [
+                {
+                  "type": "math",
+                  "tex": "\\dot{x}(t) = A x(t) + B u(t), \\qquad y(t) = C x(t)"
+                },
+                {
+                  "type": "math",
+                  "tex": "A = \\begin{pmatrix} 1 & 0 \\\\ \\alpha & 1 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}, \\quad C = \\begin{pmatrix} 1 & 0 \\end{pmatrix}"
+                },
+                {
+                  "type": "p",
+                  "text": "where $x \\in \\mathbb{R}^2$, $u \\in \\mathbb{R}$, $y \\in \\mathbb{R}$, $t \\in [0, \\infty)$, and $\\alpha \\in \\mathbb{R}$ is an unknown parameter."
+                }
+              ]
+            },
+            {
+              "id": "r3a",
+              "title": "a) Controllability",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Find all $\\alpha \\in \\mathbb{R}$ such that the system is controllable."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "AB = \\begin{pmatrix} 1 \\\\ \\alpha \\end{pmatrix} \\;\\Rightarrow\\; \\begin{pmatrix} B & AB \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 0 & \\alpha \\end{pmatrix}, \\quad \\det = \\alpha"
+                },
+                {
+                  "type": "p",
+                  "text": "**Controllable $\\Leftrightarrow \\alpha \\neq 0$.**"
+                }
+              ]
+            },
+            {
+              "id": "r3b",
+              "title": "b) α as an input — eigenvalue assignment?",
+              "exam": "retake-2021",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "For this subproblem only, assume $u = 0$ and that $\\alpha$ is an additional input to the system that we can control. Can we find a state feedback $\\alpha = K x$, $K \\in \\mathbb{R}^{1 \\times 2}$, such that at least one eigenvalue of the closed-loop system can be modified?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "With $u = 0$: $\\dot{x}_1 = x_1$, $\\dot{x}_2 = \\alpha x_1 + x_2$ — the \"input\" $\\alpha$ enters multiplied by the state $x_1$ (bilinear system). Feedback $\\alpha = k_1 x_1 + k_2 x_2$ gives"
+                },
+                {
+                  "type": "math",
+                  "tex": "\\dot{x}_2 = x_2 + k_1 x_1^2 + k_2 x_1 x_2"
+                },
+                {
+                  "type": "p",
+                  "text": "The feedback contributes only **quadratic** terms, so the linearization around the origin is the identity-like matrix $\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$ for every $K$ — the eigenvalues stay $\\{1, 1\\}$."
+                },
+                {
+                  "type": "p",
+                  "text": "**No** — no choice of $K$ modifies any eigenvalue (near the origin the feedback has no first-order effect because it acts through $x_1$)."
+                }
+              ]
+            },
+            {
+              "id": "r3c",
+              "title": "c) Transfer function",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Now let $\\alpha$ be again arbitrary but fixed. Compute the transfer function. Explain whether $\\alpha$ has an impact on the input–output behaviour of the system or not."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "(sI - A)^{-1} = \\begin{pmatrix} \\frac{1}{s-1} & 0 \\\\ \\frac{\\alpha}{(s-1)^2} & \\frac{1}{s-1} \\end{pmatrix} \\;\\Rightarrow\\; G(s) = C (sI - A)^{-1} B = \\frac{1}{s - 1}"
+                },
+                {
+                  "type": "p",
+                  "text": "$\\alpha$ does **not** appear: it only influences $x_2$, which affects neither $x_1$ nor the output $y = x_1$. Hence $\\alpha$ has **no impact on the input–output behaviour** (the $\\alpha$-coupling is unobservable from $y$)."
+                }
+              ]
+            },
+            {
+              "id": "r3d",
+              "title": "d) Step response and stability",
+              "exam": "retake-2021",
+              "credits": "5 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Compute $y(t)$ for $t \\geq 0$, with $u(t) = 1$ and $x(0) = 0$. Using the resulting $y(t)$, what can you say about the stability of the LTI system? *(If you could not solve the previous subproblem, use $G(s) = \\frac{1}{s-3}$.)*"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "Y(s) = G(s)\\,U(s) = \\frac{1}{s(s-1)} = \\frac{1}{s-1} - \\frac{1}{s} \\quad \\text{(partial fractions)}"
+                },
+                {
+                  "type": "p",
+                  "text": "Inverse Laplace: $\\mathbf{y(t) = e^t - 1}$. (With the fallback $G(s) = \\frac{1}{s-3}$: $y(t) = \\frac{1}{3}(e^{3t} - 1)$.)"
+                },
+                {
+                  "type": "p",
+                  "text": "$y(t)$ grows without bound for the bounded input $u = 1$ ⇒ the system is **not BIBO stable**; the pole at $s = 1$ (eigenvalue $1 > 0$) makes the LTI system **unstable**."
+                }
+              ]
+            },
+            {
+              "id": "r3e",
+              "title": "e) Observability",
+              "exam": "retake-2021",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Assume now that the output matrix $C = \\begin{pmatrix} c_1 & c_2 \\end{pmatrix} \\in \\mathbb{R}^{1 \\times 2}$ is arbitrary. Find all values for $C$ and $\\alpha$ such that the LTI system is observable."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "CA = \\begin{pmatrix} c_1 + \\alpha c_2 & c_2 \\end{pmatrix} \\;\\Rightarrow\\; O = \\begin{pmatrix} c_1 & c_2 \\\\ c_1 + \\alpha c_2 & c_2 \\end{pmatrix}, \\quad \\det O = -\\alpha c_2^2"
+                },
+                {
+                  "type": "p",
+                  "text": "**Observable $\\Leftrightarrow \\alpha \\neq 0$ and $c_2 \\neq 0$** ($c_1$ arbitrary)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 1",
+          "problems": [
+            {
+              "id": "n3sys",
+              "title": "New LTI system with parameter β",
+              "exam": "claude-exam-1",
+              "credits": "≈ 12 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is $\\dot{x} = A x + B u$, $y = C x$ with"
+                },
+                {
+                  "type": "math",
+                  "tex": "A = \\begin{pmatrix} -1 & \\beta \\\\ 0 & -2 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}, \\quad C = \\begin{pmatrix} 1 & 0 \\end{pmatrix}, \\quad \\beta \\in \\mathbb{R} \\text{ unknown.}"
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Find all $\\beta$ such that the system is controllable. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Compute the transfer function. For which $\\beta$ does a pole/zero cancellation occur, and how does that relate to a)? (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) For $\\beta = 0$, compute $y(t)$ for $u(t) = 1$, $x(0) = 0$. What does $y(t)$ tell you about stability? (4 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) Let $C = \\begin{pmatrix} c_1 & c_2 \\end{pmatrix}$ be arbitrary. Find all $C$ and $\\beta$ such that the system is observable. (3 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "\\textbf{a)}\\quad AB = \\begin{pmatrix} -1 + \\beta \\\\ -2 \\end{pmatrix} \\Rightarrow \\begin{pmatrix} B & AB \\end{pmatrix} = \\begin{pmatrix} 1 & -1{+}\\beta \\\\ 1 & -2 \\end{pmatrix}, \\;\\; \\det = -1 - \\beta"
+                },
+                {
+                  "type": "p",
+                  "text": "**Controllable $\\Leftrightarrow \\beta \\neq -1$.**"
+                },
+                {
+                  "type": "math",
+                  "tex": "\\textbf{b)}\\quad G(s) = \\frac{1}{s+1} + \\frac{\\beta}{(s+1)(s+2)} = \\frac{s + 2 + \\beta}{(s+1)(s+2)}"
+                },
+                {
+                  "type": "p",
+                  "text": "For $\\beta = -1$ the zero at $s = -(2 + \\beta) = -1$ cancels the pole at $s = -1$ → $G(s) = \\frac{1}{s+2}$. This is exactly the value where controllability is lost — the cancelled mode no longer appears in the input–output behaviour."
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** $\\beta = 0$: $G(s) = \\frac{s+2}{(s+1)(s+2)} = \\frac{1}{s+1}$. $Y(s) = \\frac{1}{s(s+1)} = \\frac{1}{s} - \\frac{1}{s+1}$ ⇒ $\\mathbf{y(t) = 1 - e^{-t}}$. The output stays bounded and converges to 1; the eigenvalues $-1, -2$ of the triangular $A$ lie in the open left half-plane for any $\\beta$ ⇒ **asymptotically (and BIBO) stable**."
+                },
+                {
+                  "type": "math",
+                  "tex": "\\textbf{d)}\\quad O = \\begin{pmatrix} c_1 & c_2 \\\\ -c_1 & \\beta c_1 - 2 c_2 \\end{pmatrix}, \\quad \\det O = c_1(\\beta c_1 - c_2)"
+                },
+                {
+                  "type": "p",
+                  "text": "**Observable $\\Leftrightarrow c_1 \\neq 0$ and $c_2 \\neq \\beta c_1$.**"
+                }
+              ]
+            },
+            {
+              "id": "n3pp",
+              "title": "New — state feedback / pole placement",
+              "exam": "claude-exam-1",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given the double integrator $\\dot{x} = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix} x + \\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix} u$, design a state feedback $u = -K x$, $K = \\begin{pmatrix} k_1 & k_2 \\end{pmatrix}$, such that the closed-loop eigenvalues are $-1$ and $-2$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "A - BK = \\begin{pmatrix} 0 & 1 \\\\ -k_1 & -k_2 \\end{pmatrix} \\;\\Rightarrow\\; \\chi(s) = s^2 + k_2 s + k_1"
+                },
+                {
+                  "type": "p",
+                  "text": "Desired: $(s+1)(s+2) = s^2 + 3s + 2$ ⇒ $\\mathbf{k_1 = 2}$, $\\mathbf{k_2 = 3}$, i.e. $K = \\begin{pmatrix} 2 & 3 \\end{pmatrix}$."
+                }
+              ]
+            },
+            {
+              "id": "n3lyap",
+              "title": "New — stability without linearization",
+              "exam": "claude-exam-1",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given $\\dot{x} = -x^3$. Show that the linearization around the equilibrium $x^* = 0$ is inconclusive for stability, and prove asymptotic stability with the Lyapunov function $V(x) = \\tfrac{1}{2} x^2$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Linearization: $\\partial f / \\partial x = -3x^2 \\,|_0 = 0$ → eigenvalue 0, marginal case ⇒ **no conclusion possible** from the linearization."
+                },
+                {
+                  "type": "p",
+                  "text": "Lyapunov: $V(x) = \\tfrac{1}{2} x^2 > 0$ for $x \\neq 0$, $V(0) = 0$, and $\\dot{V} = x \\cdot \\dot{x} = -x^4 < 0$ for all $x \\neq 0$ ⇒ the origin is **asymptotically stable**."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hybrid-systems",
+      "short": "Hybrid Systems",
+      "title": "Problem 4 — Hybrid Systems",
+      "desc": "Hybrid automata: invariants, guards, resets, trajectories, Zeno, timed automata. Retake 2021: 16 credits total.",
+      "groups": [
+        {
+          "title": "Ported · Retake exam 2021 — Two balls in a box",
+          "problems": [
+            {
+              "id": "r4sys",
+              "title": "Given: hybrid automaton",
+              "exam": "retake-2021",
+              "info": true,
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Two balls in a one-dimensional box (only spatial dimension $s$):"
+                },
+                {
+                  "type": "fig",
+                  "src": "balls-box.svg",
+                  "caption": "Figure 4.1: Two balls in a one-dimensional box."
+                },
+                {
+                  "type": "ul",
+                  "items": [
+                    "Box: $s \\in [-5, 5]$. State vector $x = (s_1, v_1, s_2, v_2)^\\top$ (positions and velocities of the two balls).",
+                    "Ball–wall collisions (at $s = -5$ or $s = 5$) are fully elastic: $|v|$ unchanged.",
+                    "Ball–ball collisions: the velocity after collision is multiplied by a factor $\\alpha \\in (0, 1]$ (same $\\alpha$ for both balls).",
+                    "Simultaneous wall + ball collisions are not considered.",
+                    "Single discrete state $z_1$ with flow $\\dot{s}_1 = v_1$, $\\dot{v}_1 = 0$, $\\dot{s}_2 = v_2$, $\\dot{v}_2 = 0$."
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "r4a",
+              "title": "a) Invariant",
+              "exam": "retake-2021",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Define the invariant of the state $z_1$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "\\mathrm{Inv}(z_1) = \\{\\, x \\mid -5 \\leq s_1 \\leq 5, \\; -5 \\leq s_2 \\leq 5, \\; s_1 \\leq s_2 \\,\\}"
+                },
+                {
+                  "type": "p",
+                  "text": "Both balls stay inside the box, and Ball 1 stays left of Ball 2 (they cannot pass through each other)."
+                }
+              ]
+            },
+            {
+              "id": "r4b",
+              "title": "b) No finite escape time",
+              "exam": "retake-2021",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Show that the hybrid automaton has no finite escape time."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "A finite escape time would require $\\|x(t)\\| \\to \\infty$ in finite time. Here the flow is linear: within each continuous phase the velocities are constant and the positions grow at most linearly. Jumps never increase the state: wall bounces keep $|v|$ constant, ball collisions multiply velocities by $\\alpha \\leq 1$, so $|v_1|, |v_2| \\leq \\max(|v_1(0)|, |v_2(0)|)$ for all time, and the invariant confines $s_1, s_2$ to $[-5, 5]$. The state is bounded on every finite time interval ⇒ **no finite escape time**."
+                }
+              ]
+            },
+            {
+              "id": "r4c",
+              "title": "c) Guard sets and reset functions",
+              "exam": "retake-2021",
+              "credits": "5 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Model the guard sets and reset functions of all self-transitions (as there is only one discrete state $z_1$)."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Five self-transitions; unmentioned state variables are unchanged by the reset:"
+                },
+                {
+                  "type": "table",
+                  "head": [
+                    "Transition",
+                    "Guard",
+                    "Reset"
+                  ],
+                  "rows": [
+                    [
+                      "Ball 1, left wall",
+                      "$s_1 = -5 \\;\\wedge\\; v_1 < 0$",
+                      "$v_1' = -v_1$"
+                    ],
+                    [
+                      "Ball 1, right wall",
+                      "$s_1 = 5 \\;\\wedge\\; v_1 > 0$",
+                      "$v_1' = -v_1$"
+                    ],
+                    [
+                      "Ball 2, left wall",
+                      "$s_2 = -5 \\;\\wedge\\; v_2 < 0$",
+                      "$v_2' = -v_2$"
+                    ],
+                    [
+                      "Ball 2, right wall",
+                      "$s_2 = 5 \\;\\wedge\\; v_2 > 0$",
+                      "$v_2' = -v_2$"
+                    ],
+                    [
+                      "Ball–ball collision",
+                      "$s_1 = s_2 \\;\\wedge\\; v_1 > v_2$",
+                      "$v_1' = \\alpha v_2, \\;\\; v_2' = \\alpha v_1$"
+                    ]
+                  ]
+                },
+                {
+                  "type": "p",
+                  "text": "For the ball–ball collision of two equal masses the velocities are exchanged (elastic case) and additionally multiplied by $\\alpha$. The velocity conditions in the guards ensure the balls are actually approaching (prevents infinite re-firing on the guard set)."
+                }
+              ]
+            },
+            {
+              "id": "r4d",
+              "title": "d) Trajectory sketch",
+              "exam": "retake-2021",
+              "credits": "4 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "From now on, consider the initial state at $t_0 = 0$ given by $x(t_0) = (-2, 1, 3, 0)^\\top$. Sketch the trajectories $s_1(t)$ (solid) and $s_2(t)$ (dashed) over time until the time where Ball 1 hits the left wall. The collision times do not need to be specified."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "fig",
+                  "src": "trajectory.svg"
+                },
+                {
+                  "type": "p",
+                  "text": "Phases: Ball 1 moves right ($v = 1$) from $-2$ and hits resting Ball 2 at $s = 3$ ($t_1$). Collision: $v_1' = \\alpha \\cdot 0 = 0$, $v_2' = \\alpha \\cdot 1$ — Ball 1 **stops**, Ball 2 moves right, bounces elastically off the right wall ($t_2$), comes back and hits the resting Ball 1 at $s = 3$ again ($t_3$). Second collision: $v_1' = \\alpha \\cdot (-\\alpha) = -\\alpha^2$, $v_2' = 0$ — Ball 2 stops, Ball 1 moves left with speed $\\alpha^2$ until the left wall ($t_4$)."
+                }
+              ]
+            },
+            {
+              "id": "r4e",
+              "title": "e) Switching times",
+              "exam": "retake-2021",
+              "credits": "4 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Assuming $\\alpha = 0.8$, compute the switching time of every transition in $t \\in [0, 25]$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "$t = 5$ — ball–ball collision: $s_1(t) = -2 + t = 3 = s_2$. Afterwards $v_1 = 0$, $v_2 = 0.8$.",
+                    "$t = 7.5$ — Ball 2 hits right wall: $(5 - 3)/0.8 = 2.5$. Afterwards $v_2 = -0.8$.",
+                    "$t = 10$ — second ball–ball collision at $s = 3$ (2.5 time units back). Afterwards $v_1 = 0.8 \\cdot (-0.8) = -0.64$, $v_2 = 0$.",
+                    "$t = 22.5$ — Ball 1 hits left wall: distance 8 at speed 0.64 → 12.5 time units. Afterwards $v_1 = +0.64$."
+                  ]
+                },
+                {
+                  "type": "p",
+                  "text": "The next event (Ball 1 returning to Ball 2 at $s = 3$) would occur at $t = 22.5 + 8/0.64 = 35 > 25$, so there are **exactly four switching times: $5$, $7.5$, $10$, $22.5$**."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 1",
+          "problems": [
+            {
+              "id": "n4ball",
+              "title": "New — bouncing ball: model, switching times, Zeno",
+              "exam": "claude-exam-1",
+              "credits": "≈ 10 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A ball is dropped from height $s(0) = 5$ with $v(0) = 0$ above the ground ($s = 0$); gravity $g = 10$. On impact the velocity is reversed and halved (restitution factor $0.5$). Model the system as a hybrid automaton with a single discrete state $z_1$."
+                },
+                {
+                  "type": "subq",
+                  "text": "a) State the flow function and the invariant of $z_1$. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) State the guard set and reset function of the self-transition. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Compute the first three switching times. (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) Does the automaton exhibit Zeno behavior? If yes, compute the Zeno time. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "e) Sketch $s(t)$. (1 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** Flow: $\\dot{s} = v$, $\\dot{v} = -10$. Invariant: $\\mathbf{s \\geq 0}$."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** Guard: $\\mathbf{s = 0 \\wedge v < 0}$. Reset: $\\mathbf{v' = -0.5\\,v}$ ($s$ unchanged)."
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** Free fall from 5: $5 = \\tfrac{1}{2} \\cdot 10 \\cdot t^2 \\Rightarrow \\mathbf{t_1 = 1}$ (impact speed 10, rebound 5). Flight time with launch speed $v$: $2v/g \\Rightarrow 2 \\cdot 5 / 10 = 1 \\Rightarrow \\mathbf{t_2 = 2}$ (rebound 2.5). Next flight $2 \\cdot 2.5/10 = 0.5 \\Rightarrow \\mathbf{t_3 = 2.5}$."
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** The flight times form a geometric series: $t_n = 1 + 2\\big(1 - (\\tfrac{1}{2})^{n-1}\\big)$. Infinitely many jumps accumulate at $\\mathbf{t^* = 1 + 2 = 3}$ — Zeno behavior with Zeno time 3. (Simulation must \"regularize\", e.g. stop the ball, to continue past $t^*$.)"
+                },
+                {
+                  "type": "p",
+                  "text": "**e)** Parabolic arcs with peak heights $5, 1.25, 0.3125, \\dots$ (each $\\tfrac{1}{4}$ of the previous — half the speed means a quarter of the height):"
+                },
+                {
+                  "type": "fig",
+                  "src": "bouncing-ball.svg"
+                }
+              ]
+            },
+            {
+              "id": "n4ta",
+              "title": "New — timed automaton: reachability",
+              "exam": "claude-exam-1",
+              "credits": "≈ 6 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is a timed automaton with clocks $c_1$, $c_2$ (both start at 0):"
+                },
+                {
+                  "type": "fig",
+                  "src": "ta-new.svg"
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Which clock valuations $(c_1, c_2)$ are possible while staying in $z_2$? (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Is $z_3$ reachable? If yes, at which time and clock valuation? (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) The guard of the second transition is changed to $c_1 > 3 \\wedge c_2 \\leq 1$. Is $z_3$ still reachable? (1 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** $z_1$ is left at some time $\\tau \\in [1, 2]$ (guard $c_1 \\geq 1$, invariant $c_1 \\leq 2$), with $c_2$ reset. After dwelling $d \\in [0, 1]$ in $z_2$ (invariant $c_2 \\leq 1$): $c_2 = d$, $c_1 = \\tau + d$. Reachable valuations:"
+                },
+                {
+                  "type": "math",
+                  "tex": "\\{\\, (c_1, c_2) : 0 \\leq c_2 \\leq 1, \\;\\; 1 \\leq c_1 - c_2 \\leq 2 \\,\\}"
+                },
+                {
+                  "type": "p",
+                  "text": "(the clock difference $c_1 - c_2 = \\tau$ is frozen)."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** Need $c_1 = \\tau + d \\geq 3$ with $\\tau \\leq 2$ and $d \\leq 1$ → only possible for $\\tau = 2$, $d = 1$. **Yes: $z_3$ is reached exactly at time $t = 3$ with $(c_1, c_2) = (3, 1)$** — a single point of the clock space."
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** **No.** $c_1 = \\tau + d \\leq 2 + 1 = 3$, so $c_1 > 3$ is unsatisfiable while $c_2 \\leq 1$ — the guard set becomes empty along all runs; $z_3$ is unreachable."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

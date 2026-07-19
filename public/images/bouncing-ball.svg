@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 220" width="600" role="img"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g fill="none" stroke="currentColor" stroke-width="1.2">
+  <line x1="40" y1="180" x2="640" y2="180" marker-end="url(#arr)"/>
+  <line x1="40" y1="195" x2="40" y2="15" marker-end="url(#arr)"/>
+</g>
+<g fill="none" stroke="currentColor" stroke-width="2.2">
+  <path d="M 40,30 Q 130,30 220,180"/>
+  <path d="M 220,180 Q 310,105 400,180"/>
+  <path d="M 400,180 Q 445,161 490,180"/>
+  <path d="M 490,180 Q 512,175 535,180"/>
+  <path d="M 535,180 Q 546,178.8 557,180 Q 563,179.4 569,180 Q 573,179.7 577,180"/>
+</g>
+<line x1="580" y1="180" x2="580" y2="40" stroke="currentColor" stroke-width="1" stroke-dasharray="4,4"/>
+<g font-size="11.5" fill="currentColor">
+  <text x="26" y="34">5</text><text x="50" y="24" font-style="italic">s</text><text x="644" y="196" font-style="italic">t</text>
+  <text x="220" y="198" text-anchor="middle">1</text><text x="400" y="198" text-anchor="middle">2</text>
+  <text x="490" y="198" text-anchor="middle">2.5</text><text x="580" y="198" text-anchor="middle">t* = 3</text>
+</g></svg>

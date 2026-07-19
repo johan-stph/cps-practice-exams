@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPS Practice Exams — by Section</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #1c2330; --muted: #5b6675;
+    --border: #e2e6ec; --accent: #2563eb; --accent-soft: #dbeafe;
+    --green: #16a34a; --green-soft: #dcfce7; --amber: #b45309; --amber-soft: #fef3c7;
+    --red: #b91c1c; --red-soft: #fee2e2; --shadow: 0 1px 3px rgba(16,24,40,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161d; --card: #1a212b; --text: #e6eaf0; --muted: #96a1b0;
+      --border: #2a333f; --accent: #60a5fa; --accent-soft: #1e3a5f;
+      --green: #4ade80; --green-soft: #14371f; --amber: #fbbf24; --amber-soft: #3d2e0a;
+      --red: #f87171; --red-soft: #3f1717; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1000px; margin:0 auto; padding:32px 20px 90px; }
+  header h1 { margin:0 0 4px; font-size:1.65rem; }
+  header p.sub { margin:0 0 18px; color:var(--muted); }
+  .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; background:var(--card);
+    border:1px solid var(--border); border-radius:12px; padding:12px 16px; box-shadow:var(--shadow); margin-bottom:14px; }
+  .progress-outer { flex:1 1 240px; height:12px; background:var(--border); border-radius:6px; overflow:hidden; }
+  .progress-inner { height:100%; width:0%; background:var(--green); border-radius:6px; transition:width .25s ease; }
+  #progressLabel { font-variant-numeric:tabular-nums; font-weight:600; white-space:nowrap; }
+  .toolbar button { border:1px solid var(--border); background:transparent; color:var(--muted);
+    padding:5px 12px; border-radius:8px; cursor:pointer; font-size:.82rem; }
+  .toolbar button:hover { color:var(--accent); border-color:var(--accent); }
+  .quicklinks { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px; }
+  .quicklinks a { display:inline-block; padding:7px 13px; border-radius:999px; background:var(--accent-soft);
+    color:var(--accent); text-decoration:none; font-size:.85rem; font-weight:600; border:1px solid transparent; }
+  .quicklinks a:hover { border-color:var(--accent); }
+  .note { background:var(--amber-soft); border:1px solid var(--amber); border-radius:10px;
+    padding:12px 16px; font-size:.9rem; margin-bottom:30px; }
+  h2.block { font-size:1.2rem; margin:44px 0 4px; padding-bottom:6px; border-bottom:2px solid var(--border); }
+  p.blockdesc { margin:4px 0 18px; color:var(--muted); font-size:.9rem; }
+  h3.subgroup { font-size:.95rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin:26px 0 10px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:18px 20px 14px; margin-bottom:16px; box-shadow:var(--shadow); }
+  .cardtop { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .cardtop h3 { margin:0; font-size:1.0rem; flex:1 1 auto; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:999px; font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .badge.retake { background:var(--accent-soft); color:var(--accent); }
+  .badge.new { background:var(--green-soft); color:var(--green); }
+  .pts { font-size:.75rem; color:var(--muted); font-weight:600; white-space:nowrap; }
+  label.done { font-size:.78rem; color:var(--muted); display:flex; align-items:center; gap:4px; cursor:pointer; white-space:nowrap; }
+  .card p { margin:8px 0; font-size:.93rem; }
+  .fig { display:block; margin:14px auto; max-width:100%; height:auto; color:var(--text); }
+  .figcap { text-align:center; color:var(--muted); font-size:.8rem; margin:-6px 0 10px; }
+  details.sol { margin:12px 0 6px; border:1px solid var(--border); border-radius:10px; background:var(--bg); }
+  details.sol summary { cursor:pointer; padding:9px 14px; font-weight:600; font-size:.88rem; color:var(--green); }
+  details.sol[open] summary { border-bottom:1px solid var(--border); }
+  details.sol .solbody { padding:10px 16px 12px; font-size:.92rem; }
+  .mat { display:inline-table; border-collapse:collapse; margin:2px 5px; vertical-align:middle;
+    border-left:2px solid currentColor; border-right:2px solid currentColor; border-radius:5px; }
+  .mat .r { display:table-row; }
+  .mat .c { display:table-cell; padding:0 8px; text-align:center; font-size:.92em; }
+  .mc { list-style:none; padding:0; margin:8px 0; display:flex; flex-wrap:wrap; gap:8px; }
+  .mc li { border:1px solid var(--border); border-radius:8px; padding:4px 11px; font-size:.86rem; background:var(--card); }
+  .sol .mc li.ok { border-color:var(--green); background:var(--green-soft); font-weight:600; }
+  .subq { font-weight:600; }
+  em.m, i { font-style:italic; }
+  code, .tt { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.88em; }
+  .frac { display:inline-block; text-align:center; vertical-align:middle; margin:0 3px; }
+  .frac .top { display:block; border-bottom:1px solid currentColor; padding:0 4px; }
+  .frac .bot { display:block; padding:0 4px; }
+  table.plain { border-collapse:collapse; margin:8px 0; }
+  table.plain th, table.plain td { border:1px solid var(--border); padding:4px 10px; font-size:.88rem; text-align:center; }
+  .scroll { overflow-x:auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>CPS Practice Exams</h1>
+  <p class="sub">IN2305 Cyber-Physical Systems (Althoff) — problems grouped by the four exam sections. The first block of each section is the ported <b>Retake exam of 15 Oct 2021</b> (59 credits, 90 min); the second block contains newly created problems in the same style. Figures are redrawn from the original.</p>
+</header>
+
+<div class="toolbar">
+  <div class="progress-outer"><div class="progress-inner" id="progressBar"></div></div>
+  <span id="progressLabel">0 / 0 done</span>
+  <button id="expandAll">Expand all solutions</button>
+  <button id="collapseAll">Collapse all</button>
+  <button id="resetDone">Reset progress</button>
+</div>
+
+<div class="quicklinks">
+  <a href="#sec1">1 · Short Questions</a>
+  <a href="#sec2">2 · Discrete Systems</a>
+  <a href="#sec3">3 · Continuous Systems</a>
+  <a href="#sec4">4 · Hybrid Systems</a>
+</div>
+
+<div class="note"><b>Exam conventions:</b> open book, non-programmable calculator, CPS formula sheet allowed. Every answer needs a documented solution approach. Multiple-choice: +0.5 per correct cross, −0.5 per wrong cross, subproblem total never below 0.</div>
+
+<!-- ============================================================ -->
+<h2 class="block" id="sec1">Problem 1 — Short Questions</h2>
+<p class="blockdesc">Mixed quick questions across all lectures. Retake 2021: 14 credits total.</p>
+
+<h3 class="subgroup">Ported · Retake exam 2021</h3>
+
+<article class="card" data-id="r1a">
+  <div class="cardtop"><h3>a) Mealy machine — output sequence</h3><span class="badge retake">Retake 2021</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is a Mealy machine in its initial state. Specify the resulting output sequence for the input sequence <i>ũ</i> = (ũ<sub>1</sub>, ũ<sub>2</sub>, ũ<sub>0</sub>).</p>
+  <svg class="fig" viewBox="0 0 460 210" width="440">
+    <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="230" cy="60" r="17"/><circle cx="110" cy="160" r="17"/><circle cx="350" cy="160" r="17"/>
+      <line x1="185" y1="60" x2="211" y2="60" marker-end="url(#arr)"/>
+      <path d="M 222,44 C 214,18 246,18 238,44" marker-end="url(#arr)"/>
+      <path d="M 216,71 C 180,100 155,120 126,147" marker-end="url(#arr)"/>
+      <path d="M 130,150 C 160,124 185,104 219,76" marker-end="url(#arr)"/>
+      <line x1="244" y1="70" x2="336" y2="150" marker-end="url(#arr)"/>
+      <line x1="127" y1="160" x2="331" y2="160" marker-end="url(#arr)"/>
+      <path d="M 366,152 C 392,144 392,176 366,168" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="13" font-style="italic" fill="currentColor">
+      <text x="230" y="64" text-anchor="middle">z<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+      <text x="110" y="164" text-anchor="middle">z<tspan baseline-shift="sub" font-size="10">1</tspan></text>
+      <text x="350" y="164" text-anchor="middle">z<tspan baseline-shift="sub" font-size="10">3</tspan></text>
+      <text x="230" y="14" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">1</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+      <text x="128" y="100" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">0</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+      <text x="210" y="122" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">1</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">0</tspan></text>
+      <text x="320" y="105" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">2</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">0</tspan></text>
+      <text x="229" y="180" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">0</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">1</tspan></text>
+      <text x="428" y="164" text-anchor="middle">ũ<tspan baseline-shift="sub" font-size="10">0</tspan> / ỹ<tspan baseline-shift="sub" font-size="10">1</tspan></text>
+    </g>
+  </svg>
+  <p class="figcap">Figure 1.1: Mealy machine (initial state z<sub>2</sub>).</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Start in z<sub>2</sub>: &nbsp;z<sub>2</sub> —ũ<sub>1</sub>/ỹ<sub>2</sub>→ z<sub>2</sub> —ũ<sub>2</sub>/ỹ<sub>0</sub>→ z<sub>3</sub> —ũ<sub>0</sub>/ỹ<sub>1</sub>→ z<sub>3</sub>.</p>
+    <p><b>Output sequence: <i>ỹ</i> = (ỹ<sub>2</sub>, ỹ<sub>0</sub>, ỹ<sub>1</sub>).</b></p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1b">
+  <div class="cardtop"><h3>b) Statechart with a single AND state</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Draw a statechart with a single AND state and a minimal amount of states.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>An AND state must contain at least two orthogonal (parallel) regions, and each region needs at least one state. Minimal: the AND state itself plus one basic state per region → <b>3 states</b>.</p>
+    <svg class="fig" viewBox="0 0 300 130" width="280">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="30" y="15" width="240" height="100" rx="12"/>
+        <line x1="150" y1="15" x2="150" y2="115" stroke-dasharray="5,4"/>
+        <rect x="55" y="55" width="60" height="34" rx="8"/>
+        <rect x="185" y="55" width="60" height="34" rx="8"/>
+        <line x1="85" y1="32" x2="85" y2="52" marker-end="url(#arr)"/><circle cx="85" cy="30" r="3" fill="currentColor"/>
+        <line x1="215" y1="32" x2="215" y2="52" marker-end="url(#arr)"/><circle cx="215" cy="30" r="3" fill="currentColor"/>
+      </g>
+      <g font-size="13" font-style="italic" fill="currentColor">
+        <text x="85" y="76" text-anchor="middle">A</text><text x="215" y="76" text-anchor="middle">B</text>
+      </g>
+    </svg>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1c">
+  <div class="cardtop"><h3>c) CTL transformation</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Transform the CTL expression <i>AF</i>(φ<sub>1</sub> ∧ φ<sub>2</sub>) such that only ¬, ∨, <i>EX</i>, <i>EU</i>, and <i>EG</i> are used.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Using <i>AF</i>(φ) ≡ ¬<i>EG</i>(¬φ) and De&nbsp;Morgan ¬(φ<sub>1</sub> ∧ φ<sub>2</sub>) ≡ ¬φ<sub>1</sub> ∨ ¬φ<sub>2</sub>:</p>
+    <p><b><i>AF</i>(φ<sub>1</sub> ∧ φ<sub>2</sub>) ≡ ¬<i>EG</i>(¬φ<sub>1</sub> ∨ ¬φ<sub>2</sub>)</b></p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1d">
+  <div class="cardtop"><h3>d) Euler method — approximation error</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is ẋ(t) = f(x(t)) = x(t), x(0) = 1, and the step size h = ln 2. Compute an approximation of x(h) using the Euler method, and provide the approximation error at t = h to the analytical solution x(t) = e<sup>t</sup>.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Euler step: x(h) ≈ x(0) + h·f(x(0)) = 1 + ln 2 · 1 = <b>1 + ln 2 ≈ 1.693</b>.</p>
+    <p>Analytical: x(h) = e<sup>ln 2</sup> = 2. Error: 2 − (1 + ln 2) = <b>1 − ln 2 ≈ 0.307</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1e">
+  <div class="cardtop"><h3>e) Exact linearization</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is ẋ = f(x, u), where x is the state and u is the input. Provide the most general system dynamics for which the linearization of f(x, u) in x = x* and u = u* is exact.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>The first-order Taylor expansion is exact iff all higher-order derivatives vanish, i.e. f is <b>affine</b> in x and u:</p>
+    <p><b>f(x, u) = A x + B u + c</b> &nbsp;(constant matrices A, B and constant offset c).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1f">
+  <div class="cardtop"><h3>f) LQR weighting matrices</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Explain the difference in closed-loop system behavior between two LQR controllers C<sub>1</sub> and C<sub>2</sub>, where the weighting matrices for the first are
+  Q<sub>1</sub> = <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span><span class="r"><span class="c">0</span><span class="c">1</span></span></span>, R<sub>1</sub> = 1, and for the second
+  Q<sub>2</sub> = <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span><span class="r"><span class="c">0</span><span class="c">1</span></span></span>, R<sub>2</sub> = 2.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Both weight the states equally, but C<sub>2</sub> penalizes control effort twice as much (R<sub>2</sub> = 2R<sub>1</sub>). Hence <b>C<sub>2</sub> uses smaller control inputs and the closed loop converges more slowly (less aggressively)</b>; C<sub>1</sub> reacts faster at the price of larger actuation. Only the ratio between Q and R matters.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1g">
+  <div class="cardtop"><h3>g) Timed automaton not simulatable by an FSA</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Sketch a timed automaton with two states z<sub>1</sub>, z<sub>2</sub> and one clock c<sub>1</sub>, which cannot be simulated by a finite state automaton.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <svg class="fig" viewBox="0 0 420 120" width="380">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="100" cy="60" r="18"/><circle cx="320" cy="60" r="18"/>
+        <line x1="55" y1="60" x2="80" y2="60" marker-end="url(#arr)"/>
+        <path d="M 116,49 C 180,15 250,15 305,47" marker-end="url(#arr)"/>
+        <path d="M 304,72 C 250,105 180,105 116,72" marker-end="url(#arr)"/>
+      </g>
+      <g font-size="13" fill="currentColor">
+        <text x="100" y="64" text-anchor="middle" font-style="italic">z<tspan baseline-shift="sub" font-size="10">1</tspan></text>
+        <text x="320" y="64" text-anchor="middle" font-style="italic">z<tspan baseline-shift="sub" font-size="10">2</tspan></text>
+        <text x="210" y="18" text-anchor="middle">c₁ ≥ 1 ; c₁ ≔ 0</text>
+        <text x="210" y="112" text-anchor="middle">c₁ ≥ 1 ; c₁ ≔ 0</text>
+      </g>
+    </svg>
+    <p>The behavior depends on the real-valued clock c<sub>1</sub>: the full state is (z, c<sub>1</sub>) ∈ {z<sub>1</sub>, z<sub>2</sub>} × ℝ<sub>≥0</sub>, an <b>uncountably infinite</b> state space, and whether a transition may fire depends on the exact continuous clock value. A finite state automaton has finitely many states and no notion of time, so it cannot simulate this timing-restricted behavior (any automaton with a guard that actually constrains behavior works as an answer).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r1h">
+  <div class="cardtop"><h3>h) Reachability analysis for safety</h3><span class="badge retake">Retake 2021</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Explain how reachability analysis of continuous-time dynamical systems verifies that no unsafe states are reached.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>One computes the set of all states reachable from the initial set (for all allowed inputs/disturbances) over the considered time horizon — in practice a guaranteed <b>over-approximation</b> of it. If this reachable set has an <b>empty intersection with the unsafe set</b>, no trajectory can reach an unsafe state, so the system is verified safe.</p>
+  </div></details>
+</article>
+
+<h3 class="subgroup">New practice problems</h3>
+
+<article class="card" data-id="n1a">
+  <div class="cardtop"><h3>a) Moore machine — output sequence</h3><span class="badge new">New</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is a Moore machine in its initial state z<sub>1</sub>. Specify the resulting output sequence (including the output of the initial state) for the input sequence <i>ũ</i> = (ũ<sub>1</sub>, ũ<sub>1</sub>, ũ<sub>2</sub>).</p>
+  <svg class="fig" viewBox="0 0 460 130" width="420">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="90" cy="65" r="22"/><circle cx="230" cy="65" r="22"/><circle cx="370" cy="65" r="22"/>
+      <line x1="40" y1="65" x2="66" y2="65" marker-end="url(#arr)"/>
+      <line x1="113" y1="58" x2="206" y2="58" marker-end="url(#arr)"/>
+      <line x1="253" y1="58" x2="346" y2="58" marker-end="url(#arr)"/>
+      <path d="M 352,82 C 300,120 160,120 106,84" marker-end="url(#arr)"/>
+      <path d="M 216,46 C 208,20 252,20 244,46" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="12" fill="currentColor">
+      <text x="90" y="62" text-anchor="middle" font-style="italic">z₁</text><text x="90" y="76" text-anchor="middle">/ ỹ₀</text>
+      <text x="230" y="62" text-anchor="middle" font-style="italic">z₂</text><text x="230" y="76" text-anchor="middle">/ ỹ₁</text>
+      <text x="370" y="62" text-anchor="middle" font-style="italic">z₃</text><text x="370" y="76" text-anchor="middle">/ ỹ₂</text>
+      <text x="159" y="50" text-anchor="middle" font-style="italic">ũ₁</text>
+      <text x="299" y="50" text-anchor="middle" font-style="italic">ũ₁</text>
+      <text x="230" y="122" text-anchor="middle" font-style="italic">ũ₂</text>
+      <text x="230" y="16" text-anchor="middle" font-style="italic">ũ₂</text>
+    </g>
+  </svg>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>State sequence: z<sub>1</sub> → z<sub>2</sub> → z<sub>3</sub> → z<sub>1</sub>. In a Moore machine the output is attached to the state, so the initial state already produces an output:</p>
+    <p><b><i>ỹ</i> = (ỹ<sub>0</sub>, ỹ<sub>1</sub>, ỹ<sub>2</sub>, ỹ<sub>0</sub>)</b> — one output more than inputs.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1b">
+  <div class="cardtop"><h3>b) Flattening an AND state</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>A statechart consists of a single AND state with two orthogonal regions. The first region contains 2 basic states, the second region contains 3 basic states. How many states does an equivalent flat finite state automaton have? Justify your answer.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>In an AND state both regions are active simultaneously, so the flat automaton must represent every combination of active substates: <b>2 · 3 = 6 states</b>. (This product growth is exactly why AND states compress models.)</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1c">
+  <div class="cardtop"><h3>c) CTL transformation</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Transform the CTL expression <i>AG</i>(φ<sub>1</sub>) such that only ¬, ∨, <i>EX</i>, <i>EU</i>, and <i>EG</i> are used. (Hint: <i>EF</i>(φ) ≡ <i>E</i>(true <i>U</i> φ), and true ≡ φ ∨ ¬φ.)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><i>AG</i>(φ<sub>1</sub>) ≡ ¬<i>EF</i>(¬φ<sub>1</sub>) ≡ <b>¬<i>E</i>( (φ<sub>1</sub> ∨ ¬φ<sub>1</sub>) <i>U</i> ¬φ<sub>1</sub> )</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1d">
+  <div class="cardtop"><h3>d) Euler method — error and step size</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is ẋ(t) = −2x(t), x(0) = 1, step size h = 0.5. Compute the Euler approximation of x(h) and the error to the analytical solution x(t) = e<sup>−2t</sup>. For which step sizes h does the Euler method become unstable for this system?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Euler: x(h) ≈ 1 + 0.5·(−2·1) = <b>0</b>. Analytical: e<sup>−1</sup> ≈ 0.368 → error ≈ <b>0.368</b>.</p>
+    <p>Euler iteration: x<sub>k+1</sub> = (1 − 2h)x<sub>k</sub>. Stable iff |1 − 2h| &lt; 1 ⇔ 0 &lt; h &lt; 1. <b>Unstable for h &gt; 1</b> (at h = 1 the iterate oscillates with constant amplitude).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1e">
+  <div class="cardtop"><h3>e) Linearization around an equilibrium</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Linearize ẋ = f(x, u) = −x² + u around the equilibrium x* = 2, u* = 4. State the linearized dynamics in the deviation variables δx = x − x*, δu = u − u*.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Check equilibrium: f(2, 4) = −4 + 4 = 0 ✓. Jacobians: ∂f/∂x = −2x |<sub>x*=2</sub> = −4, ∂f/∂u = 1.</p>
+    <p><b>δẋ = −4 δx + δu</b>. The linearization is a good approximation only near (x*, u*).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1f">
+  <div class="cardtop"><h3>f) LQR — scaling the state weight</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Two LQR controllers use Q<sub>1</sub> = I, R<sub>1</sub> = 1 and Q<sub>2</sub> = 10·I, R<sub>2</sub> = 1. Explain the difference in closed-loop behavior. What happens if instead <em>both</em> Q and R are multiplied by 10?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>C<sub>2</sub> penalizes state deviations 10× more relative to control effort → <b>faster convergence of the states with larger control inputs</b> (more aggressive controller).</p>
+    <p>Scaling Q <em>and</em> R by the same factor scales the whole cost function but leaves its minimizer unchanged → <b>identical controller</b>; only the ratio Q/R matters.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1g">
+  <div class="cardtop"><h3>g) Timed automaton — clock regions</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>A timed automaton has a single clock c<sub>1</sub>, and the largest constant appearing in any clock constraint is 2. Enumerate all clock regions of the region abstraction. Why is this abstraction useful?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Regions: <b>{0}, (0,1), {1}, (1,2), {2}, (2,∞)</b> — 6 regions.</p>
+    <p>All clock valuations within one region satisfy the same clock constraints and lead to time-abstract equivalent behavior. Since there are only <b>finitely many</b> regions, verification problems (e.g. reachability) on the uncountable state space become decidable on the finite region automaton.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n1h">
+  <div class="cardtop"><h3>h) Reachability analysis — inconclusive result</h3><span class="badge new">New</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>An over-approximative reachability analysis returns a reachable set that <em>intersects</em> the unsafe set. Can you conclude that the system is unsafe? What can be done next?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>No.</b> The intersection may be caused purely by the over-approximation error — the result is <b>inconclusive</b>. Next steps: reduce the over-approximation (smaller time steps, tighter set representations, splitting the initial set) and re-run; or try to find a concrete counterexample trajectory (falsification) to prove unsafety.</p>
+  </div></details>
+</article>
+
+<!-- ============================================================ -->
+<h2 class="block" id="sec2">Problem 2 — Discrete Systems</h2>
+<p class="blockdesc">Petri nets, automata, coverage, CTL/LTL. Retake 2021: 14 credits total.</p>
+
+<h3 class="subgroup">Ported · Retake exam 2021 — Signal-interpreted Petri net</h3>
+
+<article class="card" data-id="r2net">
+  <div class="cardtop"><h3>Given: signal-interpreted Petri net (SIPN)</h3><span class="badge retake">Retake 2021</span><span class="pts">Fig. 2.1</span></div>
+  <svg class="fig" viewBox="0 0 660 320" width="620">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="150" cy="130" r="14"/><circle cx="150" cy="215" r="14"/>
+      <circle cx="315" cy="115" r="14"/><circle cx="315" cy="215" r="14"/>
+      <circle cx="480" cy="55" r="14"/>
+      <circle cx="150" cy="130" r="4" fill="currentColor"/><circle cx="150" cy="215" r="4" fill="currentColor"/>
+      <line x1="232" y1="150" x2="232" y2="185" stroke-width="5"/>
+      <line x1="232" y1="255" x2="232" y2="290" stroke-width="5"/>
+      <line x1="400" y1="35" x2="400" y2="70" stroke-width="5"/>
+      <line x1="558" y1="35" x2="558" y2="70" stroke-width="5"/>
+      <line x1="163" y1="137" x2="228" y2="164" marker-end="url(#arr)"/>
+      <line x1="163" y1="208" x2="228" y2="180" marker-end="url(#arr)"/>
+      <line x1="236" y1="163" x2="302" y2="122" marker-end="url(#arr)"/>
+      <line x1="236" y1="181" x2="302" y2="209" marker-end="url(#arr)"/>
+      <line x1="308" y1="228" x2="238" y2="268" marker-end="url(#arr)"/>
+      <line x1="228" y1="268" x2="153" y2="231" marker-end="url(#arr)"/>
+      <line x1="328" y1="107" x2="396" y2="60" marker-end="url(#arr)"/>
+      <line x1="404" y1="52" x2="464" y2="52" marker-end="url(#arr)"/>
+      <line x1="494" y1="55" x2="554" y2="55" marker-end="url(#arr)"/>
+      <path d="M 560,38 L 560,12 L 150,12 L 150,114" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="13" fill="currentColor">
+      <text x="150" y="160" text-anchor="middle" font-style="italic">P₁</text>
+      <text x="150" y="245" text-anchor="middle" font-style="italic">P₅</text>
+      <text x="318" y="93" text-anchor="middle" font-style="italic">P₂</text>
+      <text x="318" y="245" text-anchor="middle" font-style="italic">P₄</text>
+      <text x="480" y="86" text-anchor="middle" font-style="italic">P₃</text>
+      <text x="232" y="205" text-anchor="middle" font-style="italic">T₁</text>
+      <text x="232" y="310" text-anchor="middle" font-style="italic">T₄</text>
+      <text x="232" y="143" text-anchor="middle" font-style="italic">u₁</text>
+      <text x="209" y="257" text-anchor="middle" font-style="italic">u₂</text>
+      <text x="400" y="26" text-anchor="middle" font-style="italic">¬u₂</text>
+      <text x="558" y="26" text-anchor="middle" font-style="italic">¬u₁</text>
+      <text x="400" y="90" text-anchor="middle" font-style="italic">T₂</text>
+      <text x="558" y="90" text-anchor="middle" font-style="italic">T₃</text>
+    </g>
+  </svg>
+  <p class="figcap">Figure 2.1: Petri net. Initial marking: one token in P₁ and one in P₅.<br>
+  T₁ (condition u₁): P₁ + P₅ → P₂ + P₄ · T₂ (¬u₂): P₂ → P₃ · T₃ (¬u₁): P₃ → P₁ · T₄ (u₂): P₄ → P₅</p>
+</article>
+
+<article class="card" data-id="r2a">
+  <div class="cardtop"><h3>a) First stable marking</h3><span class="badge retake">Retake 2021</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>What is the first stable marking for the binary inputs u<sub>1</sub> = 1 and u<sub>2</sub> = 0?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Marking order (P₁,…,P₅), start (1,0,0,0,1). Fire all enabled transitions with true conditions until nothing changes:</p>
+    <p>T₁ (u₁=1): → (0,1,0,1,0). &nbsp; T₂ (¬u₂=1): → (0,0,1,1,0). &nbsp; T₃ needs ¬u₁=0 ✗, T₄ needs u₂=1 ✗.</p>
+    <p><b>First stable marking: M = (0, 0, 1, 1, 0)</b>, i.e. tokens in P₃ and P₄.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r2b">
+  <div class="cardtop"><h3>b) Reachability graph</h3><span class="badge retake">Retake 2021</span><span class="pts">4 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Draw the reachability graph of the Petri net (consider all input combinations; simultaneous firing of transitions with non-contradictory conditions is possible).</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Six reachable markings (written as marked places):</p>
+    <svg class="fig" viewBox="0 0 620 330" width="580">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="250" y="15" width="120" height="34" rx="9"/>
+        <rect x="250" y="95" width="120" height="34" rx="9"/>
+        <rect x="90" y="175" width="120" height="34" rx="9"/>
+        <rect x="410" y="175" width="120" height="34" rx="9"/>
+        <rect x="90" y="275" width="120" height="34" rx="9"/>
+        <rect x="410" y="275" width="120" height="34" rx="9"/>
+        <line x1="310" y1="49" x2="310" y2="92" marker-end="url(#arr)"/>
+        <line x1="268" y1="129" x2="180" y2="172" marker-end="url(#arr)"/>
+        <line x1="352" y1="129" x2="440" y2="172" marker-end="url(#arr)"/>
+        <line x1="150" y1="209" x2="150" y2="272" marker-end="url(#arr)"/>
+        <line x1="210" y1="203" x2="418" y2="278" marker-end="url(#arr)"/>
+        <line x1="470" y1="209" x2="470" y2="272" marker-end="url(#arr)"/>
+        <path d="M 92,290 C 20,240 30,80 246,33" marker-end="url(#arr)"/>
+        <path d="M 532,290 C 600,240 590,80 374,33" marker-end="url(#arr)"/>
+        <path d="M 120,175 C 130,110 190,60 246,40" marker-end="url(#arr)"/>
+      </g>
+      <g font-size="12.5" fill="currentColor">
+        <text x="310" y="37" text-anchor="middle">{P₁, P₅}</text>
+        <text x="310" y="117" text-anchor="middle">{P₂, P₄}</text>
+        <text x="150" y="197" text-anchor="middle">{P₃, P₄}</text>
+        <text x="470" y="197" text-anchor="middle">{P₂, P₅}</text>
+        <text x="150" y="297" text-anchor="middle">{P₁, P₄}</text>
+        <text x="470" y="297" text-anchor="middle">{P₃, P₅}</text>
+        <text x="310" y="75" text-anchor="middle" font-style="italic">T₁ (u₁)</text>
+        <text x="195" y="145" text-anchor="middle" font-style="italic">T₂ (¬u₂)</text>
+        <text x="430" y="145" text-anchor="middle" font-style="italic">T₄ (u₂)</text>
+        <text x="118" y="245" text-anchor="middle" font-style="italic">T₃ (¬u₁)</text>
+        <text x="330" y="255" text-anchor="middle" font-style="italic">T₄ (u₂)</text>
+        <text x="502" y="245" text-anchor="middle" font-style="italic">T₂ (¬u₂)</text>
+        <text x="40" y="160" text-anchor="middle" font-style="italic">T₄</text>
+        <text x="583" y="160" text-anchor="middle" font-style="italic">T₃</text>
+        <text x="150" y="95" text-anchor="middle" font-style="italic">{T₃,T₄}</text>
+      </g>
+    </svg>
+    <p>Edges: {P₁,P₅} —T₁→ {P₂,P₄}; from {P₂,P₄} either T₂ (→{P₃,P₄}) or T₄ (→{P₂,P₅}) — never both, since ¬u₂ ∧ u₂ is contradictory. From {P₃,P₄}: T₃ → {P₁,P₄}, T₄ → {P₃,P₅}, or <b>T₃ and T₄ simultaneously</b> (¬u₁ ∧ u₂ is satisfiable) → {P₁,P₅}. From {P₂,P₅}: T₂ → {P₃,P₅}. From {P₁,P₄}: T₄ → {P₁,P₅}. From {P₃,P₅}: T₃ → {P₁,P₅}.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r2c">
+  <div class="cardtop"><h3>c) Incidence matrix</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Write down the incidence matrix in case of a place/transition Petri net (ignore firing conditions).</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Rows P₁…P₅, columns T₁…T₄ (entry = tokens produced − consumed):</p>
+    <p>N =
+    <span class="mat">
+      <span class="r"><span class="c">−1</span><span class="c">0</span><span class="c">+1</span><span class="c">0</span></span>
+      <span class="r"><span class="c">+1</span><span class="c">−1</span><span class="c">0</span><span class="c">0</span></span>
+      <span class="r"><span class="c">0</span><span class="c">+1</span><span class="c">−1</span><span class="c">0</span></span>
+      <span class="r"><span class="c">+1</span><span class="c">0</span><span class="c">0</span><span class="c">−1</span></span>
+      <span class="r"><span class="c">−1</span><span class="c">0</span><span class="c">0</span><span class="c">+1</span></span>
+    </span></p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r2d">
+  <div class="cardtop"><h3>d) Unstable cycle?</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Is it possible to create an unstable cycle by changing the firing condition of T<sub>2</sub>? If yes, state the modified firing condition of T<sub>2</sub>; if no, explain why this is not possible.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>No.</b> An unstable cycle requires a firing sequence that repeats forever while the inputs are constant. Token conservation in this net forces any repeating sequence to fire T₁ and T₃ equally often (T₁ is the only producer of P₂/P₄ and the only consumer of P₁; T₃ is the only producer of P₁). But T₁ requires u₁ and T₃ requires ¬u₁ — a contradiction for constant inputs. Since this conflict does not involve T₂, no choice of firing condition for T₂ can create an unstable cycle.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r2e">
+  <div class="cardtop"><h3>e) CTL / LTL classification (multiple choice)</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Which expressions are written in CTL only, LTL only, both CTL and LTL, neither CTL nor LTL?</p>
+  <p class="subq">1. &nbsp;AG(Φ)</p>
+  <ul class="mc"><li>neither</li><li>CTL only</li><li>both CTL and LTL</li><li>LTL only</li></ul>
+  <p class="subq">2. &nbsp;E(Φ₁ U Φ₂)</p>
+  <ul class="mc"><li>LTL only</li><li>neither</li><li>both CTL and LTL</li><li>CTL only</li></ul>
+  <p class="subq">3. &nbsp;EG(Φ₁) ⇒ GF(Φ₂)</p>
+  <ul class="mc"><li>neither</li><li>LTL only</li><li>CTL only</li><li>both CTL and LTL</li></ul>
+  <p class="subq">4. &nbsp;EG(Φ₁ ⇒ (¬Φ₂ AU Φ₃))</p>
+  <ul class="mc"><li>CTL only</li><li>both CTL and LTL</li><li>LTL only</li><li>neither</li></ul>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <ol>
+      <li><b>Both CTL and LTL</b> — CTL: AG(Φ); LTL: G(Φ) (with the implicit universal path quantifier).</li>
+      <li><b>CTL only</b> — the existential path quantifier E does not exist in LTL, and E(… U …) is a proper CTL formula.</li>
+      <li><b>Neither</b> — EG(Φ₁) is CTL-only, GF(Φ₂) is LTL-only (F not directly preceded by a path quantifier); the mixture is only expressible in CTL*.</li>
+      <li><b>CTL only</b> — every temporal operator is directly paired with a path quantifier: EG(…) and A(¬Φ₂ U Φ₃); this nesting with E is not LTL.</li>
+    </ol>
+  </div></details>
+</article>
+
+<article class="card" data-id="r2f">
+  <div class="cardtop"><h3>f) LTL formulas on a path (multiple choice)</h3><span class="badge retake">Retake 2021</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is the following path π, which is continued with φ₁ until infinity. Determine which of the following LTL formulas are correct for this path.</p>
+  <svg class="fig" viewBox="0 0 640 180" width="620">
+    <g fill="none" stroke="currentColor" stroke-width="1.3">
+      <circle cx="60" cy="60" r="8"/><circle cx="140" cy="60" r="8"/><circle cx="220" cy="60" r="8"/><circle cx="300" cy="60" r="8"/>
+      <circle cx="380" cy="60" r="8"/><circle cx="460" cy="60" r="8"/><circle cx="540" cy="60" r="8"/><circle cx="610" cy="60" r="8"/>
+      <line x1="69" y1="60" x2="130" y2="60" marker-end="url(#arr)"/><line x1="149" y1="60" x2="210" y2="60" marker-end="url(#arr)"/>
+      <line x1="229" y1="60" x2="290" y2="60" marker-end="url(#arr)"/><line x1="309" y1="60" x2="370" y2="60" marker-end="url(#arr)"/>
+      <line x1="389" y1="60" x2="450" y2="60" marker-end="url(#arr)"/><line x1="469" y1="60" x2="530" y2="60" marker-end="url(#arr)"/>
+      <line x1="549" y1="60" x2="600" y2="60" marker-end="url(#arr)"/>
+      <path d="M 616,66 C 634,85 634,110 616,126" marker-end="url(#arr)"/>
+      <circle cx="610" cy="132" r="8"/><circle cx="530" cy="132" r="8"/><circle cx="450" cy="132" r="8"/>
+      <circle cx="370" cy="132" r="8"/><circle cx="290" cy="132" r="8"/><circle cx="210" cy="132" r="8"/>
+      <line x1="601" y1="132" x2="540" y2="132" marker-end="url(#arr)"/><line x1="521" y1="132" x2="460" y2="132" marker-end="url(#arr)"/>
+      <line x1="441" y1="132" x2="380" y2="132" marker-end="url(#arr)"/><line x1="361" y1="132" x2="300" y2="132" marker-end="url(#arr)"/>
+      <line x1="281" y1="132" x2="220" y2="132" marker-end="url(#arr)"/>
+      <line x1="201" y1="132" x2="140" y2="132" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="12" font-style="italic" fill="currentColor">
+      <text x="30" y="64" text-anchor="middle">π</text>
+      <text x="60" y="40" text-anchor="middle">φ₁</text><text x="140" y="40" text-anchor="middle">φ₁</text>
+      <text x="220" y="40" text-anchor="middle">φ₁, φ₂</text><text x="380" y="40" text-anchor="middle">φ₂</text>
+      <text x="460" y="40" text-anchor="middle">φ₁</text><text x="540" y="40" text-anchor="middle">φ₂</text>
+      <text x="610" y="40" text-anchor="middle">φ₁</text>
+      <text x="610" y="158" text-anchor="middle">φ₁, φ₂</text>
+      <text x="290" y="158" text-anchor="middle">φ₁</text><text x="370" y="158" text-anchor="middle">φ₂</text>
+      <text x="450" y="158" text-anchor="middle">φ₁</text>
+      <text x="120" y="158" text-anchor="middle">(φ₁ forever)</text>
+    </g>
+  </svg>
+  <p class="figcap">Figure 2.2: Path π (unlabeled states satisfy neither φ₁ nor φ₂; positions s₀…s₁₃, then φ₁ forever).</p>
+  <div class="scroll"><table class="plain">
+    <tr><th>Formula</th><th>True / False?</th></tr>
+    <tr><td>π ⊨ φ₁ R φ₂</td><td>?</td></tr>
+    <tr><td>π ⊨ G(φ₁ ⇒ XX φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ FG(φ₁ ∨ φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ F(φ₁ U φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ F(φ₁ ⇒ φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ GF(φ₁ ⇒ X φ₂)</td><td>?</td></tr>
+  </table></div>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Labels: s₀ φ₁, s₁ φ₁, s₂ {φ₁,φ₂}, s₃ ∅, s₄ φ₂, s₅ φ₁, s₆ φ₂, s₇ φ₁, s₈ {φ₁,φ₂}, s₉ ∅, s₁₀ ∅, s₁₁ φ₁, s₁₂ φ₂, s₁₃ φ₁, then φ₁ forever.</p>
+    <ol>
+      <li>φ₁ R φ₂: <b>False</b> — release requires φ₂ to hold at position 0 (until released by φ₁ ∧ φ₂); s₀ ⊭ φ₂.</li>
+      <li>G(φ₁ ⇒ XX φ₂): <b>False</b> — s₁ ⊨ φ₁ but s₃ ⊭ φ₂.</li>
+      <li>FG(φ₁ ∨ φ₂): <b>True</b> — from s₁₁ on every state satisfies φ₁ or φ₂ (tail is φ₁ forever).</li>
+      <li>F(φ₁ U φ₂): <b>True</b> — e.g. at s₂ the formula φ₁ U φ₂ holds immediately (φ₂ holds there).</li>
+      <li>F(φ₁ ⇒ φ₂): <b>True</b> — e.g. at s₃, φ₁ is false, so the implication holds (also at s₂ where both hold).</li>
+      <li>GF(φ₁ ⇒ X φ₂): <b>False</b> — in the infinite φ₁-tail, φ₁ holds but X φ₂ never does, so the implication is false from some point on; it does not hold infinitely often.</li>
+    </ol>
+  </div></details>
+</article>
+
+<h3 class="subgroup">New practice problems</h3>
+
+<article class="card" data-id="n2sipn">
+  <div class="cardtop"><h3>New SIPN — stable marking, reachability, incidence, unstable cycle</h3><span class="badge new">New</span><span class="pts">≈ 8 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is the following signal-interpreted Petri net with binary inputs u₁, u₂:</p>
+  <svg class="fig" viewBox="0 0 560 190" width="520">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="80" cy="90" r="14"/><circle cx="80" cy="90" r="4" fill="currentColor"/>
+      <circle cx="280" cy="40" r="14"/>
+      <circle cx="280" cy="145" r="14"/>
+      <line x1="175" y1="45" x2="175" y2="80" stroke-width="5"/>
+      <line x1="385" y1="75" x2="385" y2="110" stroke-width="5"/>
+      <line x1="175" y1="110" x2="175" y2="145" stroke-width="5"/>
+      <line x1="92" y1="82" x2="171" y2="65" marker-end="url(#arr)"/>
+      <line x1="179" y1="58" x2="264" y2="43" marker-end="url(#arr)"/>
+      <line x1="293" y1="47" x2="381" y2="85" marker-end="url(#arr)"/>
+      <line x1="381" y1="100" x2="296" y2="139" marker-end="url(#arr)"/>
+      <line x1="264" y1="140" x2="179" y2="128" marker-end="url(#arr)"/>
+      <line x1="171" y1="120" x2="93" y2="97" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="13" fill="currentColor">
+      <text x="80" y="120" text-anchor="middle" font-style="italic">P₁</text>
+      <text x="280" y="18" text-anchor="middle" font-style="italic">P₂</text>
+      <text x="280" y="172" text-anchor="middle" font-style="italic">P₃</text>
+      <text x="160" y="34" text-anchor="middle" font-style="italic">T₁: u₁</text>
+      <text x="415" y="66" text-anchor="middle" font-style="italic">T₂: u₂</text>
+      <text x="150" y="168" text-anchor="middle" font-style="italic">T₃: ¬u₁</text>
+    </g>
+  </svg>
+  <p class="figcap">T₁ (u₁): P₁ → P₂ · T₂ (u₂): P₂ → P₃ · T₃ (¬u₁): P₃ → P₁. Initial marking: token in P₁.</p>
+  <p class="subq">a) What is the first stable marking for u₁ = 1, u₂ = 1? (1 cr)</p>
+  <p class="subq">b) Draw the reachability graph. (3 cr)</p>
+  <p class="subq">c) Write down the incidence matrix (place/transition net, ignoring firing conditions). (2 cr)</p>
+  <p class="subq">d) Is it possible to create an unstable cycle by changing the firing condition of T₃? If yes, state a modified firing condition; if no, explain why. (2 cr)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>a)</b> Start (1,0,0). T₁ (u₁=1) → (0,1,0). T₂ (u₂=1) → (0,0,1). T₃ needs ¬u₁ = 0 ✗. <b>Stable marking (0,0,1)</b> — token in P₃.</p>
+    <p><b>b)</b> Three markings in a cycle: {P₁} —T₁ (u₁)→ {P₂} —T₂ (u₂)→ {P₃} —T₃ (¬u₁)→ {P₁}. Only one transition is enabled in each marking, so the reachability graph is exactly this 3-cycle.</p>
+    <p><b>c)</b> Rows P₁…P₃, columns T₁…T₃:
+      <span class="mat">
+        <span class="r"><span class="c">−1</span><span class="c">0</span><span class="c">+1</span></span>
+        <span class="r"><span class="c">+1</span><span class="c">−1</span><span class="c">0</span></span>
+        <span class="r"><span class="c">0</span><span class="c">+1</span><span class="c">−1</span></span>
+      </span></p>
+    <p><b>d)</b> <b>Yes.</b> The only repeating firing sequence is the cycle T₁T₂T₃, which currently needs u₁ ∧ u₂ ∧ ¬u₁ — contradictory. Changing T₃'s condition to anything consistent with u₁ ∧ u₂, e.g. <b>T₃: u₁</b> (or u₂, or true), makes the cycle fire forever for the constant input u₁ = u₂ = 1: the token cycles P₁ → P₂ → P₃ → P₁ → … and no stable marking is ever reached — an unstable cycle.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n2fsa">
+  <div class="cardtop"><h3>New FSA — coverage metrics</h3><span class="badge new">New</span><span class="pts">≈ 9 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is the following finite state automaton with initial state z₁ (deterministic; inputs ũ₁, ũ₂, ũ₃):</p>
+  <svg class="fig" viewBox="0 0 480 230" width="440">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="90" cy="60" r="17"/><circle cx="330" cy="60" r="17"/>
+      <circle cx="330" cy="170" r="17"/><circle cx="90" cy="170" r="17"/>
+      <line x1="40" y1="60" x2="70" y2="60" marker-end="url(#arr)"/>
+      <line x1="108" y1="60" x2="310" y2="60" marker-end="url(#arr)"/>
+      <line x1="330" y1="79" x2="330" y2="150" marker-end="url(#arr)"/>
+      <line x1="311" y1="176" x2="110" y2="176" marker-end="url(#arr)"/>
+      <line x1="90" y1="150" x2="90" y2="80" marker-end="url(#arr)"/>
+      <path d="M 316,46 C 300,15 360,15 344,46" marker-end="url(#arr)"/>
+      <path d="M 314,160 C 240,120 170,120 104,158" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="13" font-style="italic" fill="currentColor">
+      <text x="90" y="64" text-anchor="middle">z₁</text><text x="330" y="64" text-anchor="middle">z₂</text>
+      <text x="330" y="174" text-anchor="middle">z₃</text><text x="90" y="174" text-anchor="middle">z₄</text>
+      <text x="210" y="50" text-anchor="middle">ũ₁</text>
+      <text x="352" y="120" text-anchor="middle">ũ₂</text>
+      <text x="210" y="196" text-anchor="middle">ũ₁</text>
+      <text x="70" y="120" text-anchor="middle">ũ₃</text>
+      <text x="330" y="12" text-anchor="middle">ũ₃</text>
+      <text x="210" y="128" text-anchor="middle">ũ₂</text>
+    </g>
+  </svg>
+  <p class="figcap">Transitions: z₁ −ũ₁→ z₂, &nbsp;z₂ −ũ₃→ z₂ (self-loop), &nbsp;z₂ −ũ₂→ z₃, &nbsp;z₃ −ũ₂→ z₁, &nbsp;z₃ −ũ₁→ z₄, &nbsp;z₄ −ũ₃→ z₁ &nbsp;(6 transitions).</p>
+  <p class="subq">a) Generate an input sequence such that the state coverage is 100 %. (2 cr)</p>
+  <p class="subq">b) What is the transition coverage of the input sequence (ũ₁, ũ₂, ũ₂, ũ₁, ũ₂)? (2 cr)</p>
+  <p class="subq">c) Generate an input sequence such that the transition coverage is 100 %. (2 cr)</p>
+  <p class="subq">d) How many different paths of length 3 (3 transitions) starting in z₁ exist? (3 cr)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>a)</b> (ũ₁, ũ₂, ũ₁): z₁ → z₂ → z₃ → z₄ — all 4 states visited → state coverage 4/4 = 100 %.</p>
+    <p><b>b)</b> z₁ −ũ₁→ z₂ −ũ₂→ z₃ −ũ₂→ z₁ −ũ₁→ z₂ −ũ₂→ z₃. Distinct transitions used: {z₁z₂, z₂z₃, z₃z₁} → coverage <b>3/6 = 1/2</b>.</p>
+    <p><b>c)</b> e.g. (ũ₁, ũ₃, ũ₂, ũ₂, ũ₁, ũ₂, ũ₁, ũ₃): z₁ −ũ₁→ z₂ −ũ₃→ z₂ −ũ₂→ z₃ −ũ₂→ z₁ −ũ₁→ z₂ −ũ₂→ z₃ −ũ₁→ z₄ −ũ₃→ z₁ — all 6 transitions traversed.</p>
+    <p><b>d)</b> Enumerate: z₁ −ũ₁→ z₂ (forced). From z₂: to z₂ (ũ₃) or z₃ (ũ₂). Length-3 paths:
+    z₁z₂z₂z₂, z₁z₂z₂z₃, z₁z₂z₃z₁, z₁z₂z₃z₄ → <b>4 paths</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n2ctl">
+  <div class="cardtop"><h3>New CTL / LTL classification (multiple choice)</h3><span class="badge new">New</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Classify each expression: CTL only, LTL only, both, or neither.</p>
+  <p class="subq">1. &nbsp;A(Φ₁ U Φ₂)</p>
+  <ul class="mc"><li>neither</li><li>CTL only</li><li>both CTL and LTL</li><li>LTL only</li></ul>
+  <p class="subq">2. &nbsp;FG(Φ₁)</p>
+  <ul class="mc"><li>LTL only</li><li>CTL only</li><li>both CTL and LTL</li><li>neither</li></ul>
+  <p class="subq">3. &nbsp;AG(EF(Φ₁))</p>
+  <ul class="mc"><li>both CTL and LTL</li><li>LTL only</li><li>CTL only</li><li>neither</li></ul>
+  <p class="subq">4. &nbsp;(X Φ₁) ⇒ AG(Φ₂)</p>
+  <ul class="mc"><li>CTL only</li><li>neither</li><li>LTL only</li><li>both CTL and LTL</li></ul>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <ol>
+      <li><b>Both</b> — CTL: A(Φ₁ U Φ₂); LTL: Φ₁ U Φ₂ with the implicit universal quantifier.</li>
+      <li><b>LTL only</b> — in CTL each F/G needs its own path quantifier; AF AG(Φ₁) is <em>not</em> equivalent to the LTL formula FG(Φ₁).</li>
+      <li><b>CTL only</b> — the classic example: "reset property" AG EF Φ has no LTL equivalent.</li>
+      <li><b>Neither</b> — X Φ₁ without a path quantifier is LTL syntax, AG(Φ₂) is CTL syntax; the combination is only CTL*.</li>
+    </ol>
+  </div></details>
+</article>
+
+<article class="card" data-id="n2ltl">
+  <div class="cardtop"><h3>New LTL formulas on a path (multiple choice)</h3><span class="badge new">New</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is the path π below, which is continued with φ₂ until infinity. Determine which of the following LTL formulas hold for π.</p>
+  <svg class="fig" viewBox="0 0 640 90" width="620">
+    <g fill="none" stroke="currentColor" stroke-width="1.3">
+      <circle cx="60" cy="50" r="8"/><circle cx="160" cy="50" r="8"/><circle cx="260" cy="50" r="8"/>
+      <circle cx="360" cy="50" r="8"/><circle cx="460" cy="50" r="8"/>
+      <line x1="69" y1="50" x2="150" y2="50" marker-end="url(#arr)"/><line x1="169" y1="50" x2="250" y2="50" marker-end="url(#arr)"/>
+      <line x1="269" y1="50" x2="350" y2="50" marker-end="url(#arr)"/><line x1="369" y1="50" x2="450" y2="50" marker-end="url(#arr)"/>
+      <line x1="469" y1="50" x2="550" y2="50" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="12" font-style="italic" fill="currentColor">
+      <text x="30" y="54" text-anchor="middle">π</text>
+      <text x="60" y="30" text-anchor="middle">φ₂</text><text x="160" y="30" text-anchor="middle">φ₁</text>
+      <text x="260" y="30" text-anchor="middle">–</text><text x="360" y="30" text-anchor="middle">φ₁, φ₂</text>
+      <text x="460" y="30" text-anchor="middle">φ₁</text>
+      <text x="560" y="30" text-anchor="middle">(φ₂ forever)</text>
+    </g>
+  </svg>
+  <p class="figcap">Positions s₀…s₄ as labeled ("–" satisfies neither), then φ₂ forever.</p>
+  <div class="scroll"><table class="plain">
+    <tr><th>Formula</th><th>True / False?</th></tr>
+    <tr><td>π ⊨ FG(φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ φ₂ U φ₁</td><td>?</td></tr>
+    <tr><td>π ⊨ G(φ₁ ⇒ X φ₂)</td><td>?</td></tr>
+    <tr><td>π ⊨ GF(φ₁)</td><td>?</td></tr>
+    <tr><td>π ⊨ φ₁ R φ₂</td><td>?</td></tr>
+    <tr><td>π ⊨ XXX φ₁</td><td>?</td></tr>
+  </table></div>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <ol>
+      <li>FG(φ₂): <b>True</b> — from s₅ on, φ₂ holds forever.</li>
+      <li>φ₂ U φ₁: <b>True</b> — φ₂ holds at s₀ and φ₁ holds at s₁.</li>
+      <li>G(φ₁ ⇒ X φ₂): <b>False</b> — s₁ ⊨ φ₁ but s₂ ⊭ φ₂.</li>
+      <li>GF(φ₁): <b>False</b> — φ₁ holds only at finitely many positions (s₁, s₃, s₄).</li>
+      <li>φ₁ R φ₂: <b>False</b> — φ₂ must hold from position 0 onward until (and including) a position where φ₁ also holds; s₁ ⊭ φ₂ and no earlier position satisfies φ₁.</li>
+      <li>XXX φ₁: <b>True</b> — position s₃ satisfies φ₁.</li>
+    </ol>
+  </div></details>
+</article>
+
+<!-- ============================================================ -->
+<h2 class="block" id="sec3">Problem 3 — Continuous Systems</h2>
+<p class="blockdesc">LTI analysis: controllability, observability, transfer functions, stability, control design. Retake 2021: 15 credits total.</p>
+
+<h3 class="subgroup">Ported · Retake exam 2021 — LTI system with parameter α</h3>
+
+<article class="card" data-id="r3sys">
+  <div class="cardtop"><h3>Given: LTI system</h3><span class="badge retake">Retake 2021</span></div>
+  <p>ẋ(t) = A x(t) + B u(t), &nbsp; y(t) = C x(t), with</p>
+  <p>A = <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span><span class="r"><span class="c"><i>α</i></span><span class="c">1</span></span></span>,
+     B = <span class="mat"><span class="r"><span class="c">1</span></span><span class="r"><span class="c">0</span></span></span>,
+     C = <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span></span>,</p>
+  <p>where x ∈ ℝ², u ∈ ℝ, y ∈ ℝ, t ∈ [0, ∞), and α ∈ ℝ is an unknown parameter.</p>
+</article>
+
+<article class="card" data-id="r3a">
+  <div class="cardtop"><h3>a) Controllability</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Find all α ∈ ℝ such that the system is controllable.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>AB = <span class="mat"><span class="r"><span class="c">1</span></span><span class="r"><span class="c"><i>α</i></span></span></span>, so the controllability matrix is
+    [B, AB] = <span class="mat"><span class="r"><span class="c">1</span><span class="c">1</span></span><span class="r"><span class="c">0</span><span class="c"><i>α</i></span></span></span> with det = α.</p>
+    <p><b>Controllable ⇔ α ≠ 0.</b></p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r3b">
+  <div class="cardtop"><h3>b) α as an input — eigenvalue assignment?</h3><span class="badge retake">Retake 2021</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>For this subproblem only, assume u = 0 and that α is an additional input we can control. Can we find a state feedback α = K x, K ∈ ℝ<sup>1×2</sup>, such that at least one eigenvalue of the closed-loop system can be modified?</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>With u = 0: ẋ₁ = x₁, ẋ₂ = α x₁ + x₂ — the "input" α enters multiplied by the state x₁ (bilinear system). Feedback α = k₁x₁ + k₂x₂ gives</p>
+    <p>ẋ₂ = x₂ + k₁x₁² + k₂x₁x₂.</p>
+    <p>The feedback contributes only <b>quadratic</b> terms, so the linearization around the origin is
+    <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span><span class="r"><span class="c">0</span><span class="c">1</span></span></span> for every K — eigenvalues stay {1, 1}.</p>
+    <p><b>No</b> — no choice of K modifies any eigenvalue (near the origin the feedback has no first-order effect because it acts through x₁).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r3c">
+  <div class="cardtop"><h3>c) Transfer function</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Now let α be again arbitrary but fixed. Compute the transfer function. Explain whether α has an impact on the input–output behaviour of the system or not.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>(sI − A)⁻¹ = <span class="mat"><span class="r"><span class="c">(s−1)⁻¹</span><span class="c">0</span></span><span class="r"><span class="c"><i>α</i>(s−1)⁻²</span><span class="c">(s−1)⁻¹</span></span></span>,
+    so G(s) = C(sI − A)⁻¹B = <b><span class="frac"><span class="top">1</span><span class="bot">s − 1</span></span></b>.</p>
+    <p>α does <b>not</b> appear: it only influences x₂, which affects neither x₁ nor the output y = x₁. Hence α has <b>no impact on the input–output behaviour</b> (the α-mode is unobservable from y).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r3d">
+  <div class="cardtop"><h3>d) Step response and stability</h3><span class="badge retake">Retake 2021</span><span class="pts">5 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Compute y(t) for t ≥ 0, with u(t) = 1 and x(0) = 0. Using the resulting y(t), what can you say about the stability of the LTI system? <em>(If you could not solve the previous subproblem, use G(s) = 1/(s − 3).)</em></p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Y(s) = G(s)·U(s) = <span class="frac"><span class="top">1</span><span class="bot">s(s − 1)</span></span> = <span class="frac"><span class="top">1</span><span class="bot">s − 1</span></span> − <span class="frac"><span class="top">1</span><span class="bot">s</span></span> &nbsp;(partial fractions).</p>
+    <p>Inverse Laplace: <b>y(t) = e<sup>t</sup> − 1</b>. &nbsp;(With the fallback G(s) = 1/(s−3): y(t) = (e<sup>3t</sup> − 1)/3.)</p>
+    <p>y(t) grows without bound for the bounded input u = 1 ⇒ the system is <b>not BIBO stable</b>; the pole at s = 1 (eigenvalue 1 &gt; 0) makes the LTI system <b>unstable</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r3e">
+  <div class="cardtop"><h3>e) Observability</h3><span class="badge retake">Retake 2021</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Assume now that the output matrix C = [c₁, c₂] ∈ ℝ<sup>1×2</sup> is arbitrary. Find all values for C and α such that the LTI system is observable.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>CA = [c₁ + αc₂, c₂], so the observability matrix is
+    O = <span class="mat"><span class="r"><span class="c">c₁</span><span class="c">c₂</span></span><span class="r"><span class="c">c₁ + <i>α</i>c₂</span><span class="c">c₂</span></span></span>,
+    &nbsp;det O = c₁c₂ − c₂(c₁ + αc₂) = −α c₂².</p>
+    <p><b>Observable ⇔ α ≠ 0 and c₂ ≠ 0</b> (c₁ arbitrary).</p>
+  </div></details>
+</article>
+
+<h3 class="subgroup">New practice problems</h3>
+
+<article class="card" data-id="n3sys">
+  <div class="cardtop"><h3>New LTI system with parameter β</h3><span class="badge new">New</span><span class="pts">≈ 12 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is ẋ = A x + B u, y = C x with</p>
+  <p>A = <span class="mat"><span class="r"><span class="c">−1</span><span class="c"><i>β</i></span></span><span class="r"><span class="c">0</span><span class="c">−2</span></span></span>,
+     B = <span class="mat"><span class="r"><span class="c">1</span></span><span class="r"><span class="c">1</span></span></span>,
+     C = <span class="mat"><span class="r"><span class="c">1</span><span class="c">0</span></span></span>, &nbsp; β ∈ ℝ unknown.</p>
+  <p class="subq">a) Find all β such that the system is controllable. (2 cr)</p>
+  <p class="subq">b) Compute the transfer function. For which β does a pole/zero cancellation occur, and how does that relate to a)? (3 cr)</p>
+  <p class="subq">c) For β = 0, compute y(t) for u(t) = 1, x(0) = 0. What does y(t) tell you about stability? (4 cr)</p>
+  <p class="subq">d) Let C = [c₁, c₂] be arbitrary. Find all C and β such that the system is observable. (3 cr)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>a)</b> AB = <span class="mat"><span class="r"><span class="c">−1 + <i>β</i></span></span><span class="r"><span class="c">−2</span></span></span> →
+    [B, AB] = <span class="mat"><span class="r"><span class="c">1</span><span class="c">−1+<i>β</i></span></span><span class="r"><span class="c">1</span><span class="c">−2</span></span></span>,
+    det = −2 − (−1 + β) = −1 − β. <b>Controllable ⇔ β ≠ −1.</b></p>
+    <p><b>b)</b> (sI − A)⁻¹ = <span class="mat"><span class="r"><span class="c">(s+1)⁻¹</span><span class="c"><i>β</i>(s+1)⁻¹(s+2)⁻¹</span></span><span class="r"><span class="c">0</span><span class="c">(s+2)⁻¹</span></span></span> ⇒
+    G(s) = <span class="frac"><span class="top">1</span><span class="bot">s + 1</span></span> + <span class="frac"><span class="top">β</span><span class="bot">(s+1)(s+2)</span></span> =
+    <b><span class="frac"><span class="top">s + 2 + β</span><span class="bot">(s + 1)(s + 2)</span></span></b>.</p>
+    <p>For <b>β = −1</b> the zero at s = −(2+β) = −1 cancels the pole at s = −1 → G(s) = 1/(s+2). This is exactly the value where the system loses controllability — the cancelled mode no longer appears in the input–output behaviour.</p>
+    <p><b>c)</b> β = 0: G(s) = (s+2)/((s+1)(s+2)) = 1/(s+1). Y(s) = 1/(s(s+1)) = 1/s − 1/(s+1) ⇒ <b>y(t) = 1 − e<sup>−t</sup></b>. The output stays bounded and converges to 1; the poles/eigenvalues −1, −2 lie in the open left half-plane ⇒ the system is <b>asymptotically (and BIBO) stable</b> — for any β, since the eigenvalues of the triangular A are always −1, −2.</p>
+    <p><b>d)</b> CA = [−c₁, βc₁ − 2c₂] →
+    O = <span class="mat"><span class="r"><span class="c">c₁</span><span class="c">c₂</span></span><span class="r"><span class="c">−c₁</span><span class="c"><i>β</i>c₁ − 2c₂</span></span></span>,
+    det = c₁(βc₁ − 2c₂) + c₁c₂ = c₁(βc₁ − c₂). <b>Observable ⇔ c₁ ≠ 0 and c₂ ≠ βc₁.</b></p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n3pp">
+  <div class="cardtop"><h3>New — state feedback / pole placement</h3><span class="badge new">New</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given the double integrator ẋ = <span class="mat"><span class="r"><span class="c">0</span><span class="c">1</span></span><span class="r"><span class="c">0</span><span class="c">0</span></span></span> x + <span class="mat"><span class="r"><span class="c">0</span></span><span class="r"><span class="c">1</span></span></span> u,
+  design a state feedback u = −K x, K = [k₁, k₂], such that the closed-loop eigenvalues are −1 and −2.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>A − BK = <span class="mat"><span class="r"><span class="c">0</span><span class="c">1</span></span><span class="r"><span class="c">−k₁</span><span class="c">−k₂</span></span></span> with characteristic polynomial s² + k₂s + k₁.</p>
+    <p>Desired: (s+1)(s+2) = s² + 3s + 2 ⇒ <b>k₁ = 2, k₂ = 3, i.e. K = [2, 3]</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="n3lyap">
+  <div class="cardtop"><h3>New — stability without linearization</h3><span class="badge new">New</span><span class="pts">3 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given ẋ = −x³. Show that the linearization around the equilibrium x* = 0 is inconclusive for stability, and prove asymptotic stability with the Lyapunov function V(x) = ½x².</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Linearization: ∂f/∂x = −3x² |₀ = 0 → eigenvalue 0, marginal case ⇒ <b>no conclusion possible</b> from the linearization.</p>
+    <p>Lyapunov: V(x) = ½x² &gt; 0 for x ≠ 0, V(0) = 0, and V̇ = x·ẋ = −x⁴ &lt; 0 for all x ≠ 0 ⇒ the origin is <b>asymptotically stable</b>.</p>
+  </div></details>
+</article>
+
+<!-- ============================================================ -->
+<h2 class="block" id="sec4">Problem 4 — Hybrid Systems</h2>
+<p class="blockdesc">Hybrid automata: invariants, guards, resets, trajectories, Zeno, timed automata. Retake 2021: 16 credits total.</p>
+
+<h3 class="subgroup">Ported · Retake exam 2021 — Two balls in a box</h3>
+
+<article class="card" data-id="r4sys">
+  <div class="cardtop"><h3>Given: hybrid automaton</h3><span class="badge retake">Retake 2021</span></div>
+  <p>Two balls in a one-dimensional box (only spatial dimension s):</p>
+  <svg class="fig" viewBox="0 0 560 90" width="520">
+    <g fill="none" stroke="currentColor" stroke-width="1.6">
+      <line x1="60" y1="20" x2="60" y2="70"/><line x1="500" y1="20" x2="500" y2="70"/>
+      <line x1="20" y1="60" x2="540" y2="60" marker-end="url(#arr)"/>
+      <circle cx="180" cy="46" r="13"/><circle cx="330" cy="46" r="13"/>
+    </g>
+    <g font-size="12" fill="currentColor">
+      <text x="180" y="26" text-anchor="middle">Ball 1</text><text x="330" y="26" text-anchor="middle">Ball 2</text>
+      <text x="60" y="84" text-anchor="middle">−5</text><text x="280" y="84" text-anchor="middle">0</text>
+      <text x="500" y="84" text-anchor="middle">5</text><text x="545" y="50" text-anchor="middle" font-style="italic">+s</text>
+      <text x="20" y="50" text-anchor="middle" font-style="italic">−s</text>
+    </g>
+  </svg>
+  <ul style="font-size:.92rem">
+    <li>Box: s ∈ [−5, 5]. State vector x = (s₁, v₁, s₂, v₂)ᵀ (positions and velocities of the two balls).</li>
+    <li>Ball–wall collisions (at s = −5 or s = 5) are fully elastic: |v| unchanged.</li>
+    <li>Ball–ball collisions: velocity after collision is multiplied by α ∈ (0, 1] (same α for both balls).</li>
+    <li>Simultaneous wall + ball collisions are not considered.</li>
+    <li>Single discrete state z₁ with flow ṡ₁ = v₁, v̇₁ = 0, ṡ₂ = v₂, v̇₂ = 0.</li>
+  </ul>
+</article>
+
+<article class="card" data-id="r4a">
+  <div class="cardtop"><h3>a) Invariant</h3><span class="badge retake">Retake 2021</span><span class="pts">1 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Define the invariant of the state z₁.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>Inv(z₁) = { x | −5 ≤ s₁ ≤ 5, &nbsp;−5 ≤ s₂ ≤ 5, &nbsp;s₁ ≤ s₂ }</b> — both balls stay inside the box, and Ball 1 stays left of Ball 2 (they cannot pass through each other).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r4b">
+  <div class="cardtop"><h3>b) No finite escape time</h3><span class="badge retake">Retake 2021</span><span class="pts">2 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Show that the hybrid automaton has no finite escape time.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>A finite escape time would require ‖x(t)‖ → ∞ in finite time. Here the flow is linear: within each continuous phase the velocities are constant and the positions grow at most linearly. Jumps never increase the state: wall bounces keep |v| constant, ball collisions multiply velocities by α ≤ 1, so |v₁|, |v₂| ≤ max(|v₁(0)|, |v₂(0)|) for all time, and the invariant confines s₁, s₂ to [−5, 5]. The state is bounded on every finite time interval ⇒ <b>no finite escape time</b>.</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r4c">
+  <div class="cardtop"><h3>c) Guard sets and reset functions</h3><span class="badge retake">Retake 2021</span><span class="pts">5 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Model the guard sets and reset functions of all self-transitions (there is only one discrete state z₁).</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p>Five self-transitions; unmentioned state variables are unchanged by the reset:</p>
+    <div class="scroll"><table class="plain">
+      <tr><th>Transition</th><th>Guard</th><th>Reset</th></tr>
+      <tr><td>Ball 1, left wall</td><td>s₁ = −5 ∧ v₁ &lt; 0</td><td>v₁′ = −v₁</td></tr>
+      <tr><td>Ball 1, right wall</td><td>s₁ = 5 ∧ v₁ &gt; 0</td><td>v₁′ = −v₁</td></tr>
+      <tr><td>Ball 2, left wall</td><td>s₂ = −5 ∧ v₂ &lt; 0</td><td>v₂′ = −v₂</td></tr>
+      <tr><td>Ball 2, right wall</td><td>s₂ = 5 ∧ v₂ &gt; 0</td><td>v₂′ = −v₂</td></tr>
+      <tr><td>Ball–ball collision</td><td>s₁ = s₂ ∧ v₁ &gt; v₂</td><td>v₁′ = α v₂, &nbsp;v₂′ = α v₁</td></tr>
+    </table></div>
+    <p>For the ball–ball collision of two equal masses, the velocities are exchanged (elastic case) and additionally multiplied by α. The velocity conditions in the guards ensure the balls are actually approaching (prevents infinite re-firing on the guard set).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r4d">
+  <div class="cardtop"><h3>d) Trajectory sketch</h3><span class="badge retake">Retake 2021</span><span class="pts">4 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>From now on consider the initial state at t₀ = 0 given by x(t₀) = (−2, 1, 3, 0)ᵀ. Sketch the trajectories s₁(t) (solid) and s₂(t) (dashed) over time until Ball 1 hits the left wall. Collision times need not be specified.</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <svg class="fig" viewBox="0 0 680 270" width="640">
+      <g stroke="currentColor" stroke-width=".5" opacity=".25">
+        <line x1="50" y1="30" x2="640" y2="30"/><line x1="50" y1="70" x2="640" y2="70"/>
+        <line x1="50" y1="110" x2="640" y2="110"/><line x1="50" y1="170" x2="640" y2="170"/>
+        <line x1="50" y1="230" x2="640" y2="230"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <line x1="50" y1="130" x2="650" y2="130" marker-end="url(#arr)"/>
+        <line x1="50" y1="245" x2="50" y2="18" marker-end="url(#arr)"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="2.2">
+        <polyline points="50,170 172,70 295,70 601,230"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-dasharray="7,5">
+        <polyline points="50,70 172,70 233,30 295,70 640,70"/>
+      </g>
+      <g font-size="11.5" fill="currentColor">
+        <text x="36" y="34">5</text><text x="36" y="74">3</text><text x="30" y="174">−2</text><text x="30" y="234">−5</text>
+        <text x="60" y="26" font-style="italic">s</text><text x="644" y="146" font-style="italic">t</text>
+        <text x="600" y="26">(right wall)</text><text x="630" y="264" text-anchor="middle">(left wall)</text>
+        <text x="172" y="250">t₁</text><text x="233" y="250">t₂</text><text x="295" y="250">t₃</text><text x="590" y="250">t₄</text>
+      </g>
+    </svg>
+    <p>Phases: Ball 1 moves right (v = 1) from −2 and hits resting Ball 2 at s = 3 (t₁). Collision: v₁′ = α·0 = 0, v₂′ = α·1 — Ball 1 <b>stops</b>, Ball 2 moves right, bounces elastically off the right wall (t₂), comes back and hits the resting Ball 1 at s = 3 again (t₃). Second collision: v₁′ = α·(−α) = −α², v₂′ = 0 — Ball 2 stops, Ball 1 moves left with speed α² until the left wall (t₄).</p>
+  </div></details>
+</article>
+
+<article class="card" data-id="r4e">
+  <div class="cardtop"><h3>e) Switching times</h3><span class="badge retake">Retake 2021</span><span class="pts">4 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Assuming α = 0.8, compute the switching time of every transition in t ∈ [0, 25].</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <ol>
+      <li><b>t = 5</b> — ball–ball collision: s₁(t) = −2 + t = 3 = s₂. Afterwards v₁ = 0, v₂ = 0.8.</li>
+      <li><b>t = 7.5</b> — Ball 2 hits right wall: (5 − 3)/0.8 = 2.5. Afterwards v₂ = −0.8.</li>
+      <li><b>t = 10</b> — second ball–ball collision at s = 3 (2.5 time units back). Afterwards v₁ = 0.8·(−0.8) = −0.64, v₂ = 0.</li>
+      <li><b>t = 22.5</b> — Ball 1 hits left wall: distance 8 at speed 0.64 → 12.5 time units. Afterwards v₁ = +0.64.</li>
+    </ol>
+    <p>The next event (Ball 1 returning to Ball 2 at s = 3) would occur at t = 22.5 + 8/0.64 = 35 &gt; 25, so there are <b>exactly four switching times: 5, 7.5, 10, 22.5</b>.</p>
+  </div></details>
+</article>
+
+<h3 class="subgroup">New practice problems</h3>
+
+<article class="card" data-id="n4ball">
+  <div class="cardtop"><h3>New — bouncing ball: model, switching times, Zeno</h3><span class="badge new">New</span><span class="pts">≈ 10 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>A ball is dropped from height s(0) = 5 with v(0) = 0 above the ground (s = 0); gravity g = 10. On impact the velocity is reversed and halved (restitution factor 0.5). Model the system as a hybrid automaton with a single discrete state z₁.</p>
+  <p class="subq">a) State the flow function and the invariant of z₁. (2 cr)</p>
+  <p class="subq">b) State the guard set and reset function of the self-transition. (2 cr)</p>
+  <p class="subq">c) Compute the first three switching times. (3 cr)</p>
+  <p class="subq">d) Does the automaton exhibit Zeno behavior? If yes, compute the Zeno time. (2 cr)</p>
+  <p class="subq">e) Sketch s(t). (1 cr)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>a)</b> Flow: ṡ = v, v̇ = −10. Invariant: <b>s ≥ 0</b>.</p>
+    <p><b>b)</b> Guard: <b>s = 0 ∧ v &lt; 0</b>. Reset: <b>v′ = −0.5 v</b> (s unchanged).</p>
+    <p><b>c)</b> Free fall from 5: 5 = ½·10·t² → <b>t₁ = 1</b> (impact speed 10, rebound 5). Flight time with launch speed v: 2v/g → 2·5/10 = 1 → <b>t₂ = 2</b> (rebound 2.5). Next flight 2·2.5/10 = 0.5 → <b>t₃ = 2.5</b>.</p>
+    <p><b>d)</b> The flight times form a geometric series: 1 + 1·(½ + ¼ + …) after t₁, i.e. t<sub>n</sub> = 1 + 2(1 − (½)<sup>n−1</sup>). Infinitely many jumps accumulate at <b>t* = 1 + 2 = 3</b> — Zeno behavior with Zeno time 3. (Simulation must "regularize", e.g. stop the ball, to continue past t*.)</p>
+    <p><b>e)</b> Parabolic arcs with peak heights 5, 1.25, 0.3125, … (each ¼ of the previous — half the speed means a quarter of the height):</p>
+    <svg class="fig" viewBox="0 0 660 220" width="600">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <line x1="40" y1="180" x2="640" y2="180" marker-end="url(#arr)"/>
+        <line x1="40" y1="195" x2="40" y2="15" marker-end="url(#arr)"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M 40,30 Q 130,30 220,180"/>
+        <path d="M 220,180 Q 310,105 400,180"/>
+        <path d="M 400,180 Q 445,161 490,180"/>
+        <path d="M 490,180 Q 512,175 535,180"/>
+        <path d="M 535,180 Q 546,178.8 557,180 Q 563,179.4 569,180 Q 573,179.7 577,180"/>
+      </g>
+      <line x1="580" y1="180" x2="580" y2="40" stroke="currentColor" stroke-width="1" stroke-dasharray="4,4"/>
+      <g font-size="11.5" fill="currentColor">
+        <text x="26" y="34">5</text><text x="50" y="24" font-style="italic">s</text><text x="644" y="196" font-style="italic">t</text>
+        <text x="220" y="198" text-anchor="middle">1</text><text x="400" y="198" text-anchor="middle">2</text>
+        <text x="490" y="198" text-anchor="middle">2.5</text><text x="580" y="198" text-anchor="middle">t* = 3</text>
+      </g>
+    </svg>
+  </div></details>
+</article>
+
+<article class="card" data-id="n4ta">
+  <div class="cardtop"><h3>New — timed automaton: reachability</h3><span class="badge new">New</span><span class="pts">≈ 6 cr</span><label class="done"><input type="checkbox">done</label></div>
+  <p>Given is a timed automaton with clocks c₁, c₂ (both start at 0):</p>
+  <svg class="fig" viewBox="0 0 620 130" width="560">
+    <g fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle cx="110" cy="60" r="22"/><circle cx="330" cy="60" r="22"/><circle cx="540" cy="60" r="22"/>
+      <line x1="55" y1="60" x2="86" y2="60" marker-end="url(#arr)"/>
+      <line x1="134" y1="60" x2="306" y2="60" marker-end="url(#arr)"/>
+      <line x1="354" y1="60" x2="516" y2="60" marker-end="url(#arr)"/>
+    </g>
+    <g font-size="12" fill="currentColor">
+      <text x="110" y="56" text-anchor="middle" font-style="italic">z₁</text><text x="110" y="72" text-anchor="middle">c₁ ≤ 2</text>
+      <text x="330" y="56" text-anchor="middle" font-style="italic">z₂</text><text x="330" y="72" text-anchor="middle">c₂ ≤ 1</text>
+      <text x="540" y="64" text-anchor="middle" font-style="italic">z₃</text>
+      <text x="220" y="38" text-anchor="middle">c₁ ≥ 1 ; c₂ ≔ 0</text>
+      <text x="435" y="38" text-anchor="middle">c₁ ≥ 3 ∧ c₂ ≤ 1</text>
+    </g>
+  </svg>
+  <p class="subq">a) Which clock valuations (c₁, c₂) are possible while staying in z₂? (2 cr)</p>
+  <p class="subq">b) Is z₃ reachable? If yes, at which time and clock valuation? (3 cr)</p>
+  <p class="subq">c) The guard of the second transition is changed to c₁ &gt; 3 ∧ c₂ ≤ 1. Is z₃ still reachable? (1 cr)</p>
+  <details class="sol"><summary>Solution</summary><div class="solbody">
+    <p><b>a)</b> z₁ is left at some time τ ∈ [1, 2] (guard c₁ ≥ 1, invariant c₁ ≤ 2), with c₂ reset. After dwelling d ∈ [0, 1] in z₂ (invariant c₂ ≤ 1): c₂ = d, c₁ = τ + d. So the reachable valuations are <b>{ (c₁, c₂) : 0 ≤ c₂ ≤ 1, &nbsp;1 ≤ c₁ − c₂ ≤ 2 }</b> (the clock difference c₁ − c₂ = τ is frozen).</p>
+    <p><b>b)</b> Need c₁ = τ + d ≥ 3 with τ ≤ 2 and d ≤ 1 → only possible for τ = 2, d = 1. <b>Yes: z₃ is reached exactly at time t = 3 with (c₁, c₂) = (3, 1)</b> — a single point of the clock space.</p>
+    <p><b>c)</b> <b>No.</b> c₁ = τ + d ≤ 2 + 1 = 3, so c₁ &gt; 3 is unsatisfiable while c₂ ≤ 1 — the guard set becomes empty along all runs; z₃ is unreachable.</p>
+  </div></details>
+</article>
+
+<footer style="color:var(--muted); font-size:.8rem; margin-top:40px">
+  Sources: IN2305 Retake exam 15 Oct 2021 (ported &amp; solved), practice-exam style SS17, lecture material L1–L13. Solutions are unofficial — verify calculation steps yourself. Generated with Claude Code.
+</footer>
+</div>
+
+<script>
+(function(){
+  const KEY = 'cps-practice-exams-done';
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } };
+  const boxes = Array.from(document.querySelectorAll('article.card label.done input'));
+  const bar = document.getElementById('progressBar'), label = document.getElementById('progressLabel');
+  function refresh(){
+    const done = boxes.filter(b => b.checked).length;
+    bar.style.width = (boxes.length ? 100*done/boxes.length : 0) + '%';
+    label.textContent = done + ' / ' + boxes.length + ' done';
+  }
+  const saved = load();
+  boxes.forEach(b => {
+    const id = b.closest('article.card').dataset.id;
+    b.checked = !!saved[id];
+    b.addEventListener('change', () => {
+      const s = load(); s[id] = b.checked; localStorage.setItem(KEY, JSON.stringify(s)); refresh();
+    });
+  });
+  refresh();
+  document.getElementById('expandAll').onclick = () => document.querySelectorAll('details.sol').forEach(d => d.open = true);
+  document.getElementById('collapseAll').onclick = () => document.querySelectorAll('details.sol').forEach(d => d.open = false);
+  document.getElementById('resetDone').onclick = () => {
+    if (!confirm('Reset all progress?')) return;
+    localStorage.removeItem(KEY); boxes.forEach(b => b.checked = false); refresh();
+  };
+})();
+</script>
+</body>
+</html>
