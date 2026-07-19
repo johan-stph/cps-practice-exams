@@ -39,6 +39,10 @@ static host or opened via `npm run preview`).
   `#/exam/claude-exam-2` (harder set): all four problems of one exam on a single page.
 - **Formula sheet** — the "📄 Formula sheet" toolbar button opens the permitted
   CPS formula sheet (`public/formula-sheet.pdf`) in a sticky panel on the right.
+- **Export as PDF** — every exam page has a "🖨 Export as PDF" button leading to
+  `#/print/<exam-id>`: a TUM-exam-style print view (credit boxes in the margin,
+  empty answer boxes, working instructions; optionally with solutions). Use the
+  browser's print dialog → Save as PDF, A4.
 
 ## Structure
 

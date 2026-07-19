@@ -124,3 +124,65 @@ h3.subgroup.examsec { display:flex; align-items:baseline; gap:12px; }
 .difficulty.mid .dot.filled { background:var(--amber); }
 .difficulty.tough .dot.filled { background:var(--red); }
 .difficulty b { font-variant-numeric:tabular-nums; }
+
+/* --- print / PDF export view --- */
+.exportlink { border:1px solid var(--border); background:var(--card); color:var(--muted);
+  padding:5px 12px; border-radius:8px; font-size:.82rem; text-decoration:none; }
+.exportlink:hover { color:var(--accent); border-color:var(--accent); }
+
+.printwrap { max-width:880px; margin:0 auto; padding:20px 16px 60px; }
+.printbar { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;
+  background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 16px; }
+.printbar a { color:var(--accent); text-decoration:none; }
+.printbar label { display:flex; gap:6px; align-items:center; font-size:.88rem; cursor:pointer; }
+.printbtn { border:1px solid var(--accent); background:var(--accent-soft); color:var(--accent);
+  padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.9rem; font-weight:600; }
+.printhint { font-size:.78rem; color:var(--muted); }
+
+.paper { background:#ffffff; color:#111111; color-scheme:light; border:1px solid var(--border);
+  box-shadow:var(--shadow); padding:14mm 12mm; font-size:.92rem; line-height:1.45; }
+.paper .figsvg, .paper .fig figcaption { color:#111111; }
+.paper .chair { font-size:.78rem; line-height:1.35; color:#333; }
+.paper .conduct { float:right; width:46%; border:1px solid #999; padding:8px 12px; font-size:.75rem;
+  color:#333; margin:0 0 10px 14px; }
+.paper .conduct .sigline { margin-top:26px; border-top:1px solid #999; padding-top:2px; font-size:.7rem; }
+.paper h1.examtitle { clear:none; text-align:center; font-size:1.6rem; margin:24px 0 10px; }
+.paper table.exammeta { width:100%; border-collapse:collapse; margin-bottom:14px; }
+.paper table.exammeta td { padding:2px 6px; font-size:.9rem; }
+.paper .instructions { border-top:2px solid #111; border-bottom:2px solid #111; padding:6px 2px 8px; margin-bottom:8px; clear:both; }
+.paper .instructions h3 { margin:4px 0 6px; font-size:1rem; }
+.paper .instructions ul { margin:0; padding-left:20px; font-size:.82rem; }
+.paper .instructions li { margin-bottom:3px; }
+
+.print-section { break-before:page; padding-top:8px; }
+.print-section:first-of-type { break-before:auto; }
+.paper h2 { font-size:1.15rem; margin:16px 0 12px; }
+.paper h2 .sectitle { font-weight:600; font-size:1rem; }
+
+.print-problem { display:grid; grid-template-columns:34px 1fr; gap:10px; margin-bottom:18px; break-inside:avoid; }
+.print-problem .print-body { min-width:0; }
+.print-problem h4 { margin:0 0 6px; font-size:.95rem; }
+.print-problem .pcr { font-weight:400; color:#555; font-size:.8rem; }
+.print-problem.info { border-left:2px solid #888; }
+.print-problem.info .print-body { padding-left:8px; }
+.creditcol { display:flex; flex-direction:column; gap:2px; padding-top:2px; }
+.creditcol .cb { display:flex; align-items:center; gap:4px; }
+.creditcol .cb i { font-style:normal; font-size:.62rem; color:#555; width:10px; text-align:right; }
+.creditcol .cb b { width:9px; height:9px; border:1px solid #333; display:inline-block; }
+.answerbox { border:1px solid #333; margin-top:8px; }
+.print-solution { border:1px solid #2c7a3f; margin-top:8px; padding:6px 12px; background:#f4faf5; }
+.psol-label { font-weight:700; color:#2c7a3f; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+.paper .mc li::before { content:"☐  "; }
+.paper table.plain th, .paper table.plain td { border-color:#999; }
+.printfooter { display:none; }
+
+@page { size: A4; margin: 16mm 13mm; }
+@media print {
+  body { background:#fff !important; }
+  .printbar { display:none; }
+  .printwrap { max-width:none; padding:0; }
+  .paper { border:none; box-shadow:none; padding:0; font-size:10.5pt; }
+  .answerbox, .creditcol .cb b { border-color:#000; }
+  .print-problem { break-inside:avoid; }
+  .fig, .mathblock { break-inside:avoid; }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, createContext, useContext } from 'react';
-import { Routes, Route, NavLink, Link, useParams, Navigate } from 'react-router-dom';
+import { Routes, Route, NavLink, Link, useParams, Navigate, useLocation } from 'react-router-dom';
 import Blocks from './Blocks.jsx';
+import PrintExam from './PrintExam.jsx';
 import { MathText } from './Math.jsx';
 import { loadDone, saveDone, clearDone } from './progress.js';
 
@@ -125,7 +126,11 @@ function ExamPage() {
         <span className="blockprog">{doneCount} / {gradable.length} done</span>
       </h2>
       <p className="blockdesc">{exam.meta} — all four problems on one page. <Difficulty value={exam.difficulty} /></p>
-      <SolutionTools onExpand={() => setAllOpen(true)} onCollapse={() => setAllOpen(false)} />
+      <div className="sectiontools">
+        <button onClick={() => setAllOpen(true)}>Expand all solutions</button>
+        <button onClick={() => setAllOpen(false)}>Collapse all</button>
+        <Link className="exportlink" to={`/print/${examId}`}>🖨 Export as PDF</Link>
+      </div>
       {perSection.map(({ section, problems }) => (
         <section key={section.id}>
           <h3 className="subgroup examsec">
@@ -195,6 +200,7 @@ function Home() {
 const SHEET_KEY = 'cps-sheet-open';
 
 export default function App() {
+  const isPrint = useLocation().pathname.startsWith('/print/');
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [done, setDone] = useState(loadDone);
@@ -223,6 +229,15 @@ export default function App() {
 
   const allProblems = data.sections.flatMap(problemsOf).filter(p => !p.info);
   const doneCount = allProblems.filter(p => done[p.id]).length;
+
+  if (isPrint) {
+    return (
+      <Routes>
+        <Route path="/print/:examId" element={<PrintExam data={data} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    );
+  }
 
   return (
     <ExamContext.Provider value={ctx}>

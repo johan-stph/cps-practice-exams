@@ -5,21 +5,39 @@
       "label": "Retake 2021",
       "title": "Retake Exam — 15 October 2021",
       "meta": "IN2305 / Retake · Examiner: Prof. Dr.-Ing. Matthias Althoff · 90 min · 59 credits · 4 problems",
-      "difficulty": 5
+      "difficulty": 5,
+      "print": {
+        "exam": "IN2305 / Retake",
+        "examiner": "Prof. Dr.-Ing. Matthias Althoff",
+        "date": "Friday 15th October, 2021",
+        "time": "11:30 – 13:00"
+      }
     },
     {
       "id": "claude-exam-1",
       "label": "Claude Exam 1",
       "title": "Claude Exam 1",
       "meta": "Newly created problems in the retake-exam style · 90–100 min · ≈ 70 credits · 4 problems",
-      "difficulty": 5
+      "difficulty": 5,
+      "print": {
+        "exam": "IN2305 / Practice (Claude Exam 1)",
+        "examiner": "Claude Fable 5",
+        "date": "any quiet afternoon",
+        "time": "90 – 100 minutes"
+      }
     },
     {
       "id": "claude-exam-2",
       "label": "Claude Exam 2",
       "title": "Claude Exam 2 (harder)",
       "meta": "Harder set: invariants, Lyapunov equations, Kripke structures, Riccati, Zeno arguments · ≈ 62 credits · 4 problems",
-      "difficulty": 7
+      "difficulty": 7,
+      "print": {
+        "exam": "IN2305 / Practice (Claude Exam 2)",
+        "examiner": "Claude Fable 5",
+        "date": "when you feel ready",
+        "time": "100 – 120 minutes"
+      }
     }
   ],
   "sections": [
