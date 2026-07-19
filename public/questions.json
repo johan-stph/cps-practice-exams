@@ -11,6 +11,12 @@
       "label": "Claude Exam 1",
       "title": "Claude Exam 1",
       "meta": "Newly created problems in the retake-exam style · 90–100 min · ≈ 70 credits · 4 problems"
+    },
+    {
+      "id": "claude-exam-2",
+      "label": "Claude Exam 2",
+      "title": "Claude Exam 2 (harder)",
+      "meta": "Harder set: invariants, Lyapunov equations, Kripke structures, Riccati, Zeno arguments · ≈ 62 credits · 4 problems"
     }
   ],
   "sections": [
@@ -374,6 +380,175 @@
                 {
                   "type": "p",
                   "text": "**No.** The intersection may be caused purely by the over-approximation error — the result is **inconclusive**. Next steps: reduce the over-approximation (smaller time steps, tighter set representations, splitting the initial set) and re-run; or try to find a concrete counterexample trajectory (falsification) to prove unsafety."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 2 (harder)",
+          "problems": [
+            {
+              "id": "c2-1a",
+              "title": "a) Mealy → Moore conversion",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A Mealy machine has $|Z|$ states and $|\\tilde{Y}|$ possible output symbols. What is the worst-case number of states of an equivalent Moore machine? Justify your answer briefly."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "In a Moore machine the output is attached to the state, but in a Mealy machine a state can be *entered* via transitions producing different outputs. In the worst case every state must be split into one copy per output symbol: $\\mathbf{|Z| \\cdot |\\tilde{Y}|}$ states (plus possibly a separate initial state if the initial output must be distinguished)."
+                }
+              ]
+            },
+            {
+              "id": "c2-1b",
+              "title": "b) Shallow vs. deep history",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A statechart contains nested XOR superstates and a history connector. Explain the difference between a shallow history connector ($H$) and a deep history connector ($H^*$)."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**Shallow history $H$** restores only the most recently active *direct* substate of the superstate; nested superstates below it start again from their default states. **Deep history $H^*$** restores the complete last active *nested configuration* recursively, down to the basic states."
+                }
+              ]
+            },
+            {
+              "id": "c2-1c",
+              "title": "c) CTL transformation — nested",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Transform $AG\\,AF(\\varphi)$ (\"$\\varphi$ holds infinitely often on all paths\") such that only $\\neg$, $\\vee$, $EX$, $EU$, and $EG$ are used."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "$AF(\\varphi) \\equiv \\neg EG(\\neg\\varphi)$ and $AG(\\psi) \\equiv \\neg EF(\\neg\\psi) \\equiv \\neg E(\\mathrm{true}\\,U\\,\\neg\\psi)$. With $\\psi = \\neg EG(\\neg\\varphi)$:"
+                },
+                {
+                  "type": "math",
+                  "tex": "AG\\,AF(\\varphi) \\;\\equiv\\; \\neg E\\big( (\\varphi \\vee \\neg\\varphi) \\; U \\; EG(\\neg\\varphi) \\big)"
+                }
+              ]
+            },
+            {
+              "id": "c2-1d",
+              "title": "d) Heun's method vs. Euler",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given $\\dot{x} = -2x$, $x(0) = 1$, $h = 0.5$. Compute one step of Heun's method (explicit trapezoidal rule) and compare its error against the explicit Euler step (analytical solution $x(t) = e^{-2t}$). What are the convergence orders of the two methods?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "$k_1 = f(x_0) = -2$; predictor $\\tilde{x} = x_0 + h k_1 = 0$; $k_2 = f(\\tilde{x}) = 0$."
+                },
+                {
+                  "type": "math",
+                  "tex": "x(h) \\approx x_0 + \\tfrac{h}{2}(k_1 + k_2) = 1 + 0.25 \\cdot (-2) = \\mathbf{0.5}"
+                },
+                {
+                  "type": "p",
+                  "text": "Exact: $e^{-1} \\approx 0.368$. Heun error $\\approx 0.132$; Euler gives $x(h) = 0$, error $\\approx 0.368$ — nearly 3× larger. Euler is first-order ($O(h)$ global), Heun second-order ($O(h^2)$ global)."
+                }
+              ]
+            },
+            {
+              "id": "c2-1e",
+              "title": "e) Parametric stability",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "For which $k \\in \\mathbb{R}$ is $\\dot{x} = \\begin{pmatrix} 0 & 1 \\\\ -k & k - 2 \\end{pmatrix} x$ asymptotically stable?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Characteristic polynomial: $\\det(sI - A) = s^2 + (2 - k)s + k$. For a second-order polynomial, Hurwitz ⇔ all coefficients positive: $2 - k > 0$ and $k > 0$."
+                },
+                {
+                  "type": "p",
+                  "text": "**Asymptotically stable $\\Leftrightarrow 0 < k < 2$.**"
+                }
+              ]
+            },
+            {
+              "id": "c2-1f",
+              "title": "f) Scalar LQR via Riccati equation",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "For the scalar system $\\dot{x} = x + u$ with cost weights $Q = 3$, $R = 1$, solve the algebraic Riccati equation $2PA - P^2 B^2 / R + Q = 0$ and state the optimal feedback gain $K$ and the closed-loop dynamics."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "$2P - P^2 + 3 = 0 \\Rightarrow P^2 - 2P - 3 = 0 \\Rightarrow P \\in \\{3, -1\\}$; take the positive solution $\\mathbf{P = 3}$."
+                },
+                {
+                  "type": "p",
+                  "text": "$K = R^{-1} B P = 3$, so $u = -3x$ and the closed loop is $\\dot{x} = (1 - 3)x = \\mathbf{-2x}$ — the unstable plant is stabilized."
+                }
+              ]
+            },
+            {
+              "id": "c2-1g",
+              "title": "g) Limits of timed automata",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Can a timed automaton (finitely many clocks, guards comparing clocks against rational constants) accept exactly the timed words where the delay between consecutive events *strictly decreases*? Justify."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**No.** To check that each new inter-event delay is smaller than the previous one, the automaton would have to remember the previous delay — an arbitrary real number — and compare against it. Clock guards only compare against finitely many *constants*, and the region abstraction yields finitely many equivalence classes, so unboundedly precise memory of a real value is impossible."
+                }
+              ]
+            },
+            {
+              "id": "c2-1h",
+              "title": "h) Why over-approximate at all?",
+              "exam": "claude-exam-2",
+              "credits": "1 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Why do reachability tools for hybrid / nonlinear continuous systems compute over-approximations instead of the exact reachable set?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "The exact reachable set is in general not computable: reachability for hybrid automata is **undecidable**, and even for nonlinear ODEs the reachable set has no closed-form / finite representation. Tools therefore enclose it using finitely representable sets (intervals, zonotopes, support functions, Taylor models) — sound for proving safety, at the cost of possible spurious intersections."
                 }
               ]
             }
@@ -863,6 +1038,173 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Claude Exam 2 (harder)",
+          "problems": [
+            {
+              "id": "c2-petri",
+              "title": "Weighted Petri net — invariants and boundedness",
+              "exam": "claude-exam-2",
+              "credits": "≈ 8 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is the place/transition net below with arc weights (unlabeled arcs have weight 1). Initial marking $M_0 = (2, 0, 1)$ for $(P_1, P_2, P_3)$."
+                },
+                {
+                  "type": "fig",
+                  "src": "petri-c2.svg",
+                  "caption": "$T_1$: consumes 2 tokens from $P_1$, produces 1 in $P_2$. $\\;T_2$: consumes 1 from $P_2$ and 1 from $P_3$, produces 2 in $P_1$ and 1 in $P_3$ ($P_3$ acts as a side condition)."
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Draw the reachability graph. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Write down the incidence matrix $N$. (1 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Compute all P-invariants ($w^\\top N = 0$) and give their interpretation. (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) Is the net bounded? Is it deadlock-free? Justify using c). (2 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** $(2,0,1) \\xrightarrow{T_1} (0,1,1) \\xrightarrow{T_2} (2,0,1)$ — a 2-cycle; in each marking exactly one transition is enabled ($T_2$ needs $P_2$, $T_1$ needs two tokens in $P_1$)."
+                },
+                {
+                  "type": "math",
+                  "tex": "\\textbf{b)}\\quad N = \\begin{pmatrix} -2 & +2 \\\\ +1 & -1 \\\\ 0 & 0 \\end{pmatrix}"
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** $w^\\top N = 0 \\Rightarrow -2w_1 + w_2 = 0 \\Rightarrow w_2 = 2w_1$, $w_3$ free. Basis: $w^{(1)} = (1, 2, 0)^\\top$ and $w^{(2)} = (0, 0, 1)^\\top$. Interpretation: $M(P_1) + 2M(P_2) = 2$ is conserved (each $P_2$-token \"is worth\" two $P_1$-tokens), and $M(P_3) = 1$ is constant (side condition)."
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** **Bounded**: the positive invariant $M(P_1) + 2M(P_2) = 2$ bounds $P_1 \\leq 2$, $P_2 \\leq 1$, and $M(P_3) = 1$. **Deadlock-free**: only the two markings from a) are reachable and each enables a transition. (Also $N v = 0$ for $v = (1,1)^\\top$: firing $T_1 T_2$ reproduces the marking — a T-invariant matching the cycle.)"
+                }
+              ]
+            },
+            {
+              "id": "c2-kripke",
+              "title": "CTL on a Kripke structure (multiple choice)",
+              "exam": "claude-exam-2",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given the Kripke structure below (initial state $s_0$; labels next to the states). Decide for each CTL formula whether it holds in $s_0$."
+                },
+                {
+                  "type": "fig",
+                  "src": "kripke-c2.svg",
+                  "caption": "Transitions: $s_0 \\to s_1$, $s_0 \\to s_2$, $s_1 \\to s_0$, $s_2 \\to s_2$."
+                },
+                {
+                  "type": "table",
+                  "head": [
+                    "Formula",
+                    "holds in $s_0$?"
+                  ],
+                  "rows": [
+                    [
+                      "$s_0 \\models AX\\,p$",
+                      "?"
+                    ],
+                    [
+                      "$s_0 \\models EF\\,q$",
+                      "?"
+                    ],
+                    [
+                      "$s_0 \\models AF\\,q$",
+                      "?"
+                    ],
+                    [
+                      "$s_0 \\models AG\\,EF\\,q$",
+                      "?"
+                    ],
+                    [
+                      "$s_0 \\models E(p \\, U \\, q)$",
+                      "?"
+                    ],
+                    [
+                      "$s_0 \\models A(p \\, U \\, q)$",
+                      "?"
+                    ]
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "$AX\\,p$: **No** — successor $s_1$ is not labeled $p$.",
+                    "$EF\\,q$: **Yes** — path $s_0 \\to s_2$ reaches $q$.",
+                    "$AF\\,q$: **No** — the path $s_0 \\to s_1 \\to s_0 \\to s_1 \\to \\dots$ never visits $q$.",
+                    "$AG\\,EF\\,q$: **Yes** — from every reachable state ($s_0$, $s_1$, $s_2$) a $q$-state is reachable: $s_1 \\to s_0 \\to s_2$, $s_2$ itself.",
+                    "$E(p \\, U \\, q)$: **Yes** — $s_0$ satisfies $p$, and its successor $s_2$ satisfies $q$.",
+                    "$A(p \\, U \\, q)$: **No** — on $s_0 \\to s_1 \\to \\dots$, state $s_1$ satisfies neither $p$ (Until broken) nor $q$."
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "c2-ltleq",
+              "title": "LTL equivalences (multiple choice)",
+              "exam": "claude-exam-2",
+              "credits": "2 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Which of the following LTL equivalences hold for all paths? (Careful — some look symmetric but are not.)"
+                },
+                {
+                  "type": "table",
+                  "head": [
+                    "Claimed equivalence",
+                    "valid?"
+                  ],
+                  "rows": [
+                    [
+                      "$G(\\varphi \\wedge \\psi) \\equiv G\\varphi \\wedge G\\psi$",
+                      "?"
+                    ],
+                    [
+                      "$F(\\varphi \\wedge \\psi) \\equiv F\\varphi \\wedge F\\psi$",
+                      "?"
+                    ],
+                    [
+                      "$GF(\\varphi \\vee \\psi) \\equiv GF\\varphi \\vee GF\\psi$",
+                      "?"
+                    ],
+                    [
+                      "$FG\\,\\varphi \\equiv GF\\,\\varphi$",
+                      "?"
+                    ]
+                  ]
+                }
+              ],
+              "solution": [
+                {
+                  "type": "ol",
+                  "items": [
+                    "**Valid** — \"always both\" is the same as \"always $\\varphi$ and always $\\psi$\".",
+                    "**Not valid** — $\\varphi$ and $\\psi$ may hold at *different* times; e.g. $\\varphi$ only at step 0, $\\psi$ only at step 1 satisfies the right side but never both together.",
+                    "**Valid** — if $\\varphi \\vee \\psi$ holds infinitely often, then by pigeonhole at least one of $\\varphi$, $\\psi$ holds infinitely often (and conversely).",
+                    "**Not valid** — $FG\\varphi$ (\"eventually forever\") is strictly stronger than $GF\\varphi$ (\"infinitely often\"): the alternating path $\\varphi, \\neg\\varphi, \\varphi, \\neg\\varphi, \\dots$ satisfies $GF\\varphi$ but not $FG\\varphi$."
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1125,6 +1467,117 @@
                 {
                   "type": "p",
                   "text": "Lyapunov: $V(x) = \\tfrac{1}{2} x^2 > 0$ for $x \\neq 0$, $V(0) = 0$, and $\\dot{V} = x \\cdot \\dot{x} = -x^4 < 0$ for all $x \\neq 0$ ⇒ the origin is **asymptotically stable**."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 2 (harder)",
+          "problems": [
+            {
+              "id": "c2-lti",
+              "title": "Oscillatory LTI system — step response and Lyapunov equation",
+              "exam": "claude-exam-2",
+              "credits": "≈ 12 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given is $\\dot{x} = A x + B u$, $y = C x$ with"
+                },
+                {
+                  "type": "math",
+                  "tex": "A = \\begin{pmatrix} 0 & 1 \\\\ -2 & -2 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix}, \\quad C = \\begin{pmatrix} 1 & 0 \\end{pmatrix}"
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Compute the eigenvalues of $A$ and classify the stability. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Compute the transfer function, the natural frequency $\\omega_n$ and the damping ratio $\\zeta$. Does the step response overshoot? (3 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Compute $y(t)$ for $u(t) = 1$, $x(0) = 0$. (4 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) Solve the Lyapunov equation $A^\\top P + P A = -I$ for the symmetric matrix $P$ and verify that $P \\succ 0$. What does this prove? (3 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** $\\det(sI - A) = s^2 + 2s + 2 = 0 \\Rightarrow s_{1,2} = -1 \\pm j$. Both eigenvalues have negative real part ⇒ **asymptotically stable** (oscillatory)."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** $G(s) = \\dfrac{1}{s^2 + 2s + 2}$. Comparing with $s^2 + 2\\zeta\\omega_n s + \\omega_n^2$: $\\omega_n = \\sqrt{2}$, $2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = \\tfrac{1}{\\sqrt{2}} \\approx 0.707 < 1$ ⇒ underdamped ⇒ **yes, it overshoots** (slightly, $\\approx 4\\%$)."
+                },
+                {
+                  "type": "math",
+                  "tex": "\\textbf{c)}\\quad Y(s) = \\frac{1}{s(s^2 + 2s + 2)} = \\frac{1/2}{s} + \\frac{-\\tfrac{1}{2}(s+1) - \\tfrac{1}{2}}{(s+1)^2 + 1}"
+                },
+                {
+                  "type": "math",
+                  "tex": "y(t) = \\tfrac{1}{2}\\big(1 - e^{-t}(\\cos t + \\sin t)\\big), \\qquad y(\\infty) = \\tfrac{1}{2} = G(0)"
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** With $P = \\begin{pmatrix} p_1 & p_2 \\\\ p_2 & p_3 \\end{pmatrix}$: the equation gives $-4p_2 = -1$, $p_1 - 2p_2 - 2p_3 = 0$, $2p_2 - 4p_3 = -1$, so $p_2 = \\tfrac{1}{4}$, $p_3 = \\tfrac{3}{8}$, $p_1 = \\tfrac{5}{4}$:"
+                },
+                {
+                  "type": "math",
+                  "tex": "P = \\begin{pmatrix} 5/4 & 1/4 \\\\ 1/4 & 3/8 \\end{pmatrix}, \\quad p_1 > 0, \\;\\; \\det P = \\tfrac{15}{32} - \\tfrac{1}{16} = \\tfrac{13}{32} > 0 \\;\\Rightarrow\\; P \\succ 0"
+                },
+                {
+                  "type": "p",
+                  "text": "$V(x) = x^\\top P x$ is a Lyapunov function with $\\dot{V} = -x^\\top x < 0$ — an algebraic **proof of asymptotic stability** confirming a)."
+                }
+              ]
+            },
+            {
+              "id": "c2-obs",
+              "title": "Observer design (dual pole placement)",
+              "exam": "claude-exam-2",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "For the double integrator $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, $C = \\begin{pmatrix} 1 & 0 \\end{pmatrix}$, design a Luenberger observer gain $L = \\begin{pmatrix} l_1 \\\\ l_2 \\end{pmatrix}$ such that the error dynamics $A - LC$ have a double eigenvalue at $-3$."
+                }
+              ],
+              "solution": [
+                {
+                  "type": "math",
+                  "tex": "A - LC = \\begin{pmatrix} -l_1 & 1 \\\\ -l_2 & 0 \\end{pmatrix} \\;\\Rightarrow\\; \\chi(s) = s^2 + l_1 s + l_2"
+                },
+                {
+                  "type": "p",
+                  "text": "Desired $(s + 3)^2 = s^2 + 6s + 9$ ⇒ $\\mathbf{l_1 = 6}$, $\\mathbf{l_2 = 9}$. (Observer design is the dual of state-feedback pole placement: eigenvalues of $A - LC$ instead of $A - BK$.)"
+                }
+              ]
+            },
+            {
+              "id": "c2-nl",
+              "title": "Nonlinear system — multiple equilibria",
+              "exam": "claude-exam-2",
+              "credits": "3 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Given $\\dot{x} = x - x^3$. Find all equilibria and classify their stability via linearization. Which conclusion would be impossible with a single global linearization?"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "Equilibria: $x(1 - x^2) = 0 \\Rightarrow x^* \\in \\{0, 1, -1\\}$. $f'(x) = 1 - 3x^2$: $f'(0) = 1 > 0$ ⇒ $x^* = 0$ **unstable**; $f'(\\pm 1) = -2 < 0$ ⇒ $x^* = \\pm 1$ **asymptotically stable**."
+                },
+                {
+                  "type": "p",
+                  "text": "A single linearization is only valid near one point: it cannot capture that the system is *bistable* — trajectories converge to $+1$ or $-1$ depending on the sign of $x(0)$; there is no global exponential behavior."
                 }
               ]
             }
@@ -1424,6 +1877,115 @@
                 {
                   "type": "p",
                   "text": "**c)** **No.** $c_1 = \\tau + d \\leq 2 + 1 = 3$, so $c_1 > 3$ is unsatisfiable while $c_2 \\leq 1$ — the guard set becomes empty along all runs; $z_3$ is unreachable."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Claude Exam 2 (harder)",
+          "problems": [
+            {
+              "id": "c2-thermo",
+              "title": "Thermostat — exponential dynamics and limit cycle",
+              "exam": "claude-exam-2",
+              "credits": "≈ 9 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "A heater controls the room temperature $T$ with the hybrid automaton below; $T(0) = 20$ in $z_{on}$."
+                },
+                {
+                  "type": "fig",
+                  "src": "thermostat-c2.svg"
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Solve the flow in each mode for an arbitrary starting temperature. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Compute the dwell time in each mode and the period of the resulting limit cycle. (4 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Is the execution Zeno? Justify. (1 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "d) The hysteresis is removed: both switching thresholds are set to $T = 22.5$. What happens? (2 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** Both modes are $\\dot{T} = T_\\infty - T$ with equilibrium $T_\\infty$: $T(t) = T_\\infty + (T_0 - T_\\infty)e^{-t}$, with $T_\\infty = 30$ (on) and $T_\\infty = 15$ (off)."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** On, from 20: $T(t) = 30 - 10e^{-t} = 25 \\Rightarrow e^{-t} = \\tfrac{1}{2} \\Rightarrow t_{on} = \\ln 2$. Off, from 25: $T(t) = 15 + 10e^{-t} = 20 \\Rightarrow t_{off} = \\ln 2$. Period $\\mathbf{2\\ln 2 \\approx 1.39}$; the trajectory is immediately periodic between 20 and 25:"
+                },
+                {
+                  "type": "fig",
+                  "src": "thermostat-sol-c2.svg"
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** **Not Zeno**: every dwell time equals $\\ln 2 > 0$, so only finitely many switches occur in any finite time interval."
+                },
+                {
+                  "type": "p",
+                  "text": "**d)** With both guards at $T = 22.5$ the automaton must switch instantly whenever the threshold is crossed in either direction: dwell times shrink to zero and the execution **chatters** — infinitely many switches at one time instant (Zeno). Physically the system \"slides\" along $T = 22.5$; simulators need regularization (e.g. reintroducing hysteresis or a minimum dwell time)."
+                }
+              ]
+            },
+            {
+              "id": "c2-tank",
+              "title": "Two-tank system — Zeno via a volume argument",
+              "exam": "claude-exam-2",
+              "credits": "≈ 7 cr",
+              "statement": [
+                {
+                  "type": "p",
+                  "text": "Two tanks leak constantly with outflows $v_1 = 1$ and $v_2 = 2$. A single inflow pipe with rate $w = 2.5$ serves one tank at a time and is switched (instantaneously) to tank $i$ whenever its level reaches $x_i = 0$. Initially $x_1(0) = x_2(0) = 1$ and the inflow feeds tank 1."
+                },
+                {
+                  "type": "fig",
+                  "src": "watertank-c2.svg"
+                },
+                {
+                  "type": "subq",
+                  "text": "a) Model the system as a hybrid automaton (two locations, flows, invariants, guards). (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "b) Compute the first two switching times. (2 cr)"
+                },
+                {
+                  "type": "subq",
+                  "text": "c) Show that the execution is Zeno and compute the Zeno time — without summing the whole series. (3 cr)"
+                }
+              ],
+              "solution": [
+                {
+                  "type": "p",
+                  "text": "**a)** $q_1$ (fill tank 1): $\\dot{x}_1 = w - v_1 = 1.5$, $\\dot{x}_2 = -2$, invariant $x_2 \\geq 0$, guard $x_2 = 0 \\to q_2$. $\\;q_2$ (fill tank 2): $\\dot{x}_1 = -1$, $\\dot{x}_2 = 0.5$, invariant $x_1 \\geq 0$, guard $x_1 = 0 \\to q_1$. Resets: identity."
+                },
+                {
+                  "type": "p",
+                  "text": "**b)** In $q_1$: $x_2 = 1 - 2t = 0 \\Rightarrow \\mathbf{t_1 = 0.5}$ (then $x_1 = 1.75$). In $q_2$: $x_1 = 1.75 - (t - t_1) = 0 \\Rightarrow \\mathbf{t_2 = 2.25}$ (then $x_2 = 0.875$)."
+                },
+                {
+                  "type": "p",
+                  "text": "**c)** Consider the total volume $V = x_1 + x_2$. In *every* mode $\\dot{V} = w - v_1 - v_2 = -0.5$, so $V(t) = 2 - 0.5\\,t$ independent of switching. As long as $V > 0$, the automaton always switches again in finite time (the drained tank empties while the other is filled), so switches keep occurring — but they cannot continue past the time when $V = 0$, since keeping both tanks nonnegative with $w < v_1 + v_2$ is impossible. The switching times therefore accumulate at"
+                },
+                {
+                  "type": "math",
+                  "tex": "t^* = \\frac{x_1(0) + x_2(0)}{v_1 + v_2 - w} = \\frac{2}{0.5} = \\mathbf{4}"
+                },
+                {
+                  "type": "p",
+                  "text": "— infinitely many transitions before $t^* = 4$: a **Zeno execution**, and the volume argument replaces summing the geometric series of dwell times."
                 }
               ]
             }

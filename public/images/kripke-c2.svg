@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 210" width="430" role="img"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g fill="none" stroke="currentColor" stroke-width="1.4">
+  <circle cx="110" cy="70" r="22"/><circle cx="330" cy="70" r="22"/><circle cx="220" cy="165" r="22"/>
+  <line x1="55" y1="70" x2="85" y2="70" marker-end="url(#arr)"/>
+  <path d="M 133,63 C 190,45 250,45 306,63" marker-end="url(#arr)"/>
+  <path d="M 308,80 C 250,98 190,98 134,80" marker-end="url(#arr)"/>
+  <line x1="126" y1="87" x2="204" y2="150" marker-end="url(#arr)"/>
+  <path d="M 244,155 C 274,140 288,120 302,92" marker-end="url(#arr)" stroke-dasharray="0"/>
+  <path d="M 236,183 C 250,208 190,208 204,183" marker-end="url(#arr)"/>
+</g>
+<g font-size="12.5" fill="currentColor">
+  <text x="110" y="67" text-anchor="middle" font-style="italic">s₀</text><text x="110" y="82" text-anchor="middle">{p}</text>
+  <text x="330" y="67" text-anchor="middle" font-style="italic">s₁</text><text x="330" y="82" text-anchor="middle">{ }</text>
+  <text x="220" y="162" text-anchor="middle" font-style="italic">s₂</text><text x="220" y="177" text-anchor="middle">{p,q}</text>
+</g></svg>

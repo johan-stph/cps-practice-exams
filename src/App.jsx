@@ -6,7 +6,7 @@ import { loadDone, saveDone, clearDone } from './progress.js';
 
 const ExamContext = createContext(null);
 
-const BADGE_CLASS = { 'retake-2021': 'retake', 'claude-exam-1': 'new' };
+const BADGE_CLASS = { 'retake-2021': 'retake', 'claude-exam-1': 'new', 'claude-exam-2': 'hard' };
 
 function problemsOf(section) {
   return section.groups.flatMap(g => g.problems);
@@ -214,7 +214,7 @@ export default function App() {
           <h1><Link to="/">CPS Practice Exams</Link></h1>
           <p className="sub">
             IN2305 Cyber-Physical Systems (Althoff) — retake exam Oct 2021 ported per section, plus
-            Claude Exam 1 in the same style.
+            Claude Exams 1–2 in the same style.
           </p>
         </header>
         <div className="toolbar">

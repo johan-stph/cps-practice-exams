@@ -11,8 +11,8 @@
 
 React + React Router + KaTeX app with practice problems for IN2305 Cyber-Physical
 Systems (TUM, Althoff), grouped by the four exam sections. Contains the ported &
-solved retake exam of 15 Oct 2021 plus **Claude Exam 1** — new problems generated
-in the same style, with worked solutions.
+solved retake exam of 15 Oct 2021 plus **Claude Exam 1** and the harder
+**Claude Exam 2** — new problems generated in the same style, with worked solutions.
 
 ## Run
 
@@ -35,8 +35,8 @@ static host or opened via `npm run preview`).
 
 - **By topic** — `#/short-questions`, `#/discrete-systems`, `#/continuous-systems`,
   `#/hybrid-systems`: both exams' problems for one section.
-- **Full exams (one page)** — `#/exam/retake-2021` and `#/exam/claude-exam-1`:
-  all four problems of one exam on a single page.
+- **Full exams (one page)** — `#/exam/retake-2021`, `#/exam/claude-exam-1`, and
+  `#/exam/claude-exam-2` (harder set): all four problems of one exam on a single page.
 - **Formula sheet** — the "📄 Formula sheet" toolbar button opens the permitted
   CPS formula sheet (`public/formula-sheet.pdf`) in a sticky panel on the right.
 
