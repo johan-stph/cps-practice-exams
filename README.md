@@ -11,8 +11,9 @@
 
 React + React Router + KaTeX app with practice problems for IN2305 Cyber-Physical
 Systems (TUM, Althoff), grouped by the four exam sections. Contains the ported &
-solved retake exam of 15 Oct 2021 plus **Claude Exam 1** and the harder
-**Claude Exam 2** — new problems generated in the same style, with worked solutions.
+solved retake exam of 15 Oct 2021 plus **Claude Exam 1**, the harder
+**Claude Exam 2**, the easier **Claude Exam 3**, and the normal-difficulty
+**Claude Exam 4** — new problems generated in the same style, with worked solutions.
 
 ## Run
 
@@ -34,9 +35,10 @@ static host or opened via `npm run preview`).
 ## Views
 
 - **By topic** — `#/short-questions`, `#/discrete-systems`, `#/continuous-systems`,
-  `#/hybrid-systems`: both exams' problems for one section.
-- **Full exams (one page)** — `#/exam/retake-2021`, `#/exam/claude-exam-1`, and
-  `#/exam/claude-exam-2` (harder set): all four problems of one exam on a single page.
+  `#/hybrid-systems`: every exam's problems for one section.
+- **Full exams (one page)** — `#/exam/retake-2021`, `#/exam/claude-exam-1`,
+  `#/exam/claude-exam-2` (harder), `#/exam/claude-exam-3` (easier), and
+  `#/exam/claude-exam-4` (normal): all four problems of one exam on a single page.
 - **Formula sheet** — the "📄 Formula sheet" toolbar button opens the permitted
   CPS formula sheet (`public/formula-sheet.pdf`) in a sticky panel on the right.
 - **Export as PDF** — every exam page has a "🖨 Export as PDF" button leading to
@@ -47,9 +49,11 @@ static host or opened via `npm run preview`).
 ## Structure
 
 - `public/questions.json` — all problem content. Top-level `exams` defines the
-  exam ids/labels (`retake-2021`, `claude-exam-1`); each problem carries an
+  exam ids/labels (including `retake-2021` and `claude-exam-1` through
+  `claude-exam-4`); each problem carries an
   `exam` field. Text supports inline LaTeX (`$...$`), `**bold**`, `*italic*`;
-  block types: `p`, `math` (display LaTeX), `fig`, `subq`, `mc`, `ul`/`ol`, `table`.
+  block types: `p`, `math` (display LaTeX), `fig`, `subq`, `mc`, `tf`,
+  `ul`/`ol`, `table`.
 - `public/images/*.svg` — figures (stroke `currentColor`, inlined at runtime so
   they follow light/dark theme).
 - `src/` — app code: `App.jsx` (routes, progress), `Blocks.jsx` (JSON → React),
@@ -66,6 +70,7 @@ To add a problem: append it to the right section/group in `questions.json`
 - The Retake-2021 problems and the formula sheet originate from the TUM course
   IN2305 (Prof. Althoff) and are included for **personal exam preparation**;
   rights to that material remain with their authors.
-- Claude Exam 1 problems, all worked solutions, figures, and the app itself were
-  generated with [Claude Code](https://claude.com/claude-code) (Claude Fable 5).
-  Solutions are unofficial — verify the calculation steps yourself.
+- The initial generated exams, solutions, figures, and app were created with
+  [Claude Code](https://claude.com/claude-code) (Claude Fable 5). Exams 3 and 4
+  extend the same format with easy and normal-difficulty sets. All solutions are
+  unofficial — verify the calculation steps yourself.

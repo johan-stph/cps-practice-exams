@@ -65,6 +65,7 @@ h3.subgroup { font-size:.92rem; color:var(--muted); text-transform:uppercase; le
 .badge.retake { background:var(--accent-soft); color:var(--accent); }
 .badge.new { background:var(--green-soft); color:var(--green); }
 .badge.hard { background:var(--amber-soft); color:var(--amber); }
+.badge.easy { background:var(--green-soft); color:var(--green); }
 .pts { font-size:.75rem; color:var(--muted); font-weight:600; white-space:nowrap; }
 label.done { font-size:.78rem; color:var(--muted); display:flex; align-items:center; gap:4px; cursor:pointer; white-space:nowrap; }
 .card p { margin:8px 0; font-size:.93rem; }

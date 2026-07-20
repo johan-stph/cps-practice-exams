@@ -7,7 +7,13 @@ import { loadDone, saveDone, clearDone } from './progress.js';
 
 const ExamContext = createContext(null);
 
-const BADGE_CLASS = { 'retake-2021': 'retake', 'claude-exam-1': 'new', 'claude-exam-2': 'hard' };
+const BADGE_CLASS = {
+  'retake-2021': 'retake',
+  'claude-exam-1': 'new',
+  'claude-exam-2': 'hard',
+  'claude-exam-3': 'easy',
+  'claude-exam-4': 'new',
+};
 
 function Difficulty({ value }) {
   if (!value) return null;
@@ -246,7 +252,7 @@ export default function App() {
           <h1><Link to="/">CPS Practice Exams</Link></h1>
           <p className="sub">
             IN2305 Cyber-Physical Systems (Althoff) — retake exam Oct 2021 ported per section, plus
-            Claude Exams 1–2 in the same style.
+            Claude Exams 1–4 in the same style.
           </p>
         </header>
         <div className="toolbar">
